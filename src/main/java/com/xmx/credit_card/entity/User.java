@@ -1,27 +1,27 @@
-package com.xmx.credit_card.user.entity;
+package com.xmx.credit_card.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class User {
 
-    Long id;
+    private Long id;
 
-    String account;
+    private String account;
 
-    String passWord;
+    private String passWord;
 
-    String userName;
+    private String userName;
 
-    String idCard;
+    private String idCard;
 
-    Integer point;
+    private Integer point;
 
-    BigDecimal amount;
+    private BigDecimal amount;
 
-    LocalDateTime createTime;
+    private LocalDateTime createTime;
 
-    String idPicture;
+    private String idPicture;
 
     public Long getId() {
         return id;
