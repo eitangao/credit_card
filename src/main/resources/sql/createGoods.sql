@@ -8,6 +8,6 @@ spoint int(10) not null comment'积分数',
 type varchar(20) not null comment'分类',
 application varchar(20) comment'适用人群',
 count int(10) default 0 comment'销量',
-create_time datetime not null default current_timestamp comment'生产日期',
+create_time datetime default current_timestamp comment'生产日期',
 primary key(id)
 );

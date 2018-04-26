@@ -9,7 +9,7 @@ public class User {
 
     private String account;
 
-    private String passWord;
+    private String password;
 
     private String userName;
 
@@ -39,12 +39,12 @@ public class User {
         this.account = account;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUserName() {

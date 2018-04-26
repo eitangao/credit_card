@@ -9,7 +9,7 @@ id_card char(18) comment'身份证号',
 point int(10) comment'积分',
 amount numeric(10,2) comment'额度',
 id_pict varchar(50) comment'照片路径',
-create_time datetime not null default current_timestamp comment'创建时间',
+create_time datetime default current_timestamp comment'创建时间',
 primary key(id));
 insert into user(acct,pass_word) values('user1','12345678'),
 ('user2','12345678'),
