@@ -3,7 +3,7 @@ package com.xmx.credit_card.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class Transcation {
+public class Transaction {
 
     private Long id;
 
