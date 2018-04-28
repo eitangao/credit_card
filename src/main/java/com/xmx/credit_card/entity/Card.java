@@ -1,5 +1,6 @@
 package com.xmx.credit_card.entity;
 
+import com.xmx.credit_card.constant.CardStatus;
 import com.xmx.credit_card.constant.CardType;
 
 import java.math.BigDecimal;
@@ -18,6 +19,16 @@ public class Card {
     private String inqpwd;
 
     private String acct;
+
+    private CardStatus status;
+
+    public CardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CardStatus status) {
+        this.status = status;
+    }
 
     private LocalDateTime createTime;
 
