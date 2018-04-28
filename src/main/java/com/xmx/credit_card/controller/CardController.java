@@ -1,5 +1,6 @@
 package com.xmx.credit_card.controller;
 
+import com.xmx.credit_card.constant.CardType;
 import com.xmx.credit_card.entity.Card;
 import com.xmx.credit_card.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,8 @@ public class CardController {
     @Autowired
     private CardService cardService;
     @RequestMapping(value = "/list")
-    public List<Card> getCardListByCondition(@RequestParam(required = false)Integer point){
-        return cardService.getCardListByCondition();
-
-    }
+    public List<Card> getCardListByCondition(@RequestParam(required = false)String account, @RequestParam(required = false)CardType cardType){
+        return cardService.getCardListByCondition(account,cardType);
+        }
 
 }

@@ -12,10 +12,12 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, price, spoint, type, application, count, create_time
+    id, name, price, spoint, type as productType, application as applicaplePeople, count, create_time
   </sql>
   <select id="getGoodsByCondition" parameterType="Map" resultMap="Goods">
-    select * from goods
+    select
+    <include refid="Base_Column_List"/>
+    from goods
     <where>
       <if test="productType!=null">
         and type = #{productType}
