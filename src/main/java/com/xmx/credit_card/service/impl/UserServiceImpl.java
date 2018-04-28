@@ -6,6 +6,7 @@ import com.xmx.credit_card.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Service
@@ -32,6 +33,16 @@ public class UserServiceImpl implements UserService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public void updateAmount(String account, BigDecimal amount) {
+        userMapper.updateAmount(account,amount);
+    }
+
+    @Override
+    public BigDecimal getAmountByAccount(String account) {
+        return userMapper.getAmountByAccount(account);
     }
 
     @Override

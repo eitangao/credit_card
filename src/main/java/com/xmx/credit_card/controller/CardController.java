@@ -24,5 +24,9 @@ public class CardController {
     public boolean applyCard(@RequestBody CreateCardCommand command){
         return cardService.applyCard(command);
     }
+    @RequestMapping(value = "/approve")
+    public boolean approveCardApply(@RequestParam Boolean approve){
+        return true;
+    }
 
 }

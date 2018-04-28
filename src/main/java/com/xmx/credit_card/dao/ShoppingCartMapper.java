@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.xmx.credit_card.entity.ShoppingCart;
 import com.xmx.credit_card.entity.ShoppingCartExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Mapper
+@Component
 public interface ShoppingCartMapper {
     int countByExample(ShoppingCartExample example);
 

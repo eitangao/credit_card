@@ -41,5 +41,11 @@
     select * from goods
     where id=1;
   </select>
+  <select id="getGoodsById" resultMap="Goods">
+    select
+    <include refid="Base_Column_List"/>
+    from goods
+    where id =#{id}
+  </select>
 
 </mapper>

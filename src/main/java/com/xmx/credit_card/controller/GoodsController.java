@@ -1,14 +1,12 @@
 package com.xmx.credit_card.controller;
 
+import com.xmx.credit_card.command.BuyGoodsCommand;
 import com.xmx.credit_card.constant.ApplicaplePeople;
 import com.xmx.credit_card.constant.ProductType;
 import com.xmx.credit_card.entity.Goods;
 import com.xmx.credit_card.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +24,9 @@ public class GoodsController {
                                                @RequestParam(required = false) String lowPrice,@RequestParam(required = false) String highPrice,@RequestParam(required = false) String orderBy,
                                                @RequestParam(required = false)String order){
         return goodsService.getGoodsByCondition(productType,applicaplePeople,lowPrice,highPrice,orderBy,order);
+    }
+    @RequestMapping(value = "/buy")
+    public void buyGoods(@RequestBody BuyGoodsCommand buyGoodsCommand){
+        goodsService.buyGoods(buyGoodsCommand);
     }
 }

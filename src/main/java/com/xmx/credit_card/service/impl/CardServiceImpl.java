@@ -34,6 +34,31 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public void approveCardApply(String cardNumber, boolean approve) {
+        Card card=new Card();
+        card.setCardNumber(cardNumber);
+        if(approve)
+            card.setStatus(CardStatus.ACTIVE);
+        else
+            card.setStatus(CardStatus.REJECTED);
+        cardMapper.updateByPrimaryKeySelective(card);
+    }
+
+    @Override
+    public BigDecimal getAmountByCardNumber(String cardNumber) {
+        return cardMapper.selectByPrimaryKey(cardNumber).getCardAmount();
+    }
+
+    @Override
+    public void deleteCard(String cardNumber) {
+        Card card=new Card();
+        card.setCardNumber(cardNumber);
+        card.setStatus(CardStatus.DELETE);
+        cardMapper.updateByPrimaryKeySelective(card);
+
+    }
+
+    @Override
     public boolean applyCard(CreateCardCommand command) {
         if(!CollectionUtils.isEmpty(getCardListByCondition(command.getAccount(),command.getCardType(),CardStatus.ACTIVE)))
             throw new RuntimeException("You have already had the same card!");

@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.xmx.credit_card.entity.Transaction;
 import com.xmx.credit_card.entity.TransactionExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Mapper
+@Component
 public interface TransactionMapper {
     int countByExample(TransactionExample example);
 
