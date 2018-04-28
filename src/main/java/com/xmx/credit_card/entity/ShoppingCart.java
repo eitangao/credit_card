@@ -1,5 +1,8 @@
 package com.xmx.credit_card.entity;
 
+
+import java.time.LocalDateTime;
+
 public class ShoppingCart {
 
     private Long id;
@@ -8,7 +11,17 @@ public class ShoppingCart {
 
     private Integer productNumber;
 
-    private String account;
+    private String acct;
+
+    private LocalDateTime createTime;
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 
     public Long getId() {
         return id;
@@ -34,11 +47,11 @@ public class ShoppingCart {
         this.productNumber = productNumber;
     }
 
-    public String getAccount() {
-        return account;
+    public String getAcct() {
+        return acct;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setAcct(String acct) {
+        this.acct = acct;
     }
 }

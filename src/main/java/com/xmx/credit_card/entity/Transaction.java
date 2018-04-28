@@ -9,11 +9,21 @@ public class Transaction {
 
     private BigDecimal amount;
 
-    private String account;
+    private String acct;
 
     private String cardNumber;
 
     private Long productId;
+
+    private Integer point;
+
+    public Integer getPoint() {
+        return point;
+    }
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
 
     private LocalDateTime createTime;
 
@@ -33,12 +43,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getAccount() {
-        return account;
+    public String getAcct() {
+        return acct;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setAcct(String acct) {
+        this.acct = acct;
     }
 
     public String getCardNumber() {

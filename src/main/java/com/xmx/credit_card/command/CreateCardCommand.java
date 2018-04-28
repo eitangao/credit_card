@@ -8,6 +8,16 @@ public class CreateCardCommand {
 
     private String account;
 
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public CardType getCardType() {
         return cardType;
     }
