@@ -9,15 +9,15 @@ public class Card {
 
     private String cardNumber;
 
-    private BigDecimal amount;
+    private BigDecimal cardAmount;
 
-    private Integer point;
+    private Integer cardPoint;
 
     private CardType cardType;
 
-    private String password;
+    private String inqpwd;
 
-    private String account;
+    private String acct;
 
     private LocalDateTime createTime;
 
@@ -29,20 +29,20 @@ public class Card {
         this.cardNumber = cardNumber;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getCardAmount() {
+        return cardAmount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setCardAmount(BigDecimal cardAmount) {
+        this.cardAmount = cardAmount;
     }
 
-    public Integer getPoint() {
-        return point;
+    public Integer getCardPoint() {
+        return cardPoint;
     }
 
-    public void setPoint(Integer point) {
-        this.point = point;
+    public void setCardPoint(Integer cardPoint) {
+        this.cardPoint = cardPoint;
     }
 
     public CardType getCardType() {
@@ -53,20 +53,20 @@ public class Card {
         this.cardType = cardType;
     }
 
-    public String getPassword() {
-        return password;
+    public String getInqpwd() {
+        return inqpwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setInqpwd(String inqpwd) {
+        this.inqpwd = inqpwd;
     }
 
-    public String getAccount() {
-        return account;
+    public String getAcct() {
+        return acct;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setAcct(String acct) {
+        this.acct = acct;
     }
 
     public LocalDateTime getCreateTime() {
