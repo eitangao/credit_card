@@ -58,6 +58,8 @@ public interface UserMapper {
     @Update("update user set pass_word = #{password}, name = #{userName}, id_card = #{idCard}, id_pict =#{idPicture}" +
             " where id = #{id} ")
     void updateUserInfo(User user);
+    @Update("update user set status = 0 where acct = #{account}")
+    void frozeAccount(String account);
 
 
 }

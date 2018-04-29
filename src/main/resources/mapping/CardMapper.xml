@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xmx.credit_card.dao.CardMapper">
   <resultMap id="Card" type="Card">
-    <id column="card_number" jdbcType="CHAR" property="cardNumber" />
+    <id column="card_number" jdbcType="CHAR" property="account" />
     <result column="card_amount" jdbcType="DECIMAL" property="cardAmount" />
     <result column="card_point" jdbcType="INTEGER" property="cardPoint" />
     <result column="card_type" jdbcType="CHAR" property="cardType" typeHandler="org.apache.ibatis.type.EnumTypeHandler" />
@@ -91,11 +91,11 @@
     select 
     <include refid="Base_Column_List" />
     from card
-    where card_number = #{cardNumber,jdbcType=CHAR}
+    where card_number = #{account,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from card
-    where card_number = #{cardNumber,jdbcType=CHAR}
+    where card_number = #{account,jdbcType=CHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.xmx.credit_card.entity.CardExample">
     delete from card
@@ -107,14 +107,14 @@
     insert into card (card_number, card_amount, card_point, 
       card_type, inqpwd, acct, 
       status, create_time)
-    values (#{cardNumber,jdbcType=CHAR}, #{cardAmount,jdbcType=DECIMAL}, #{cardPoint,jdbcType=INTEGER}, 
+    values (#{account,jdbcType=CHAR}, #{cardAmount,jdbcType=DECIMAL}, #{cardPoint,jdbcType=INTEGER},
       #{cardType,jdbcType=CHAR}, #{inqpwd,jdbcType=VARCHAR}, #{acct,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="Card">
     insert into card
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cardNumber != null">
+      <if test="account != null">
         card_number,
       </if>
       <if test="cardAmount != null">
@@ -140,8 +140,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cardNumber != null">
-        #{cardNumber,jdbcType=CHAR},
+      <if test="account != null">
+        #{account,jdbcType=CHAR},
       </if>
       <if test="cardAmount != null">
         #{cardAmount,jdbcType=DECIMAL},
@@ -175,8 +175,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update card
     <set>
-      <if test="record.cardNumber != null">
-        card_number = #{record.cardNumber,jdbcType=CHAR},
+      <if test="record.account != null">
+        card_number = #{record.account,jdbcType=CHAR},
       </if>
       <if test="record.cardAmount != null">
         card_amount = #{record.cardAmount,jdbcType=DECIMAL},
@@ -206,7 +206,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update card
-    set card_number = #{record.cardNumber,jdbcType=CHAR},
+    set card_number = #{record.account,jdbcType=CHAR},
       card_amount = #{record.cardAmount,jdbcType=DECIMAL},
       card_point = #{record.cardPoint,jdbcType=INTEGER},
       card_type = #{record.cardType,jdbcType=CHAR},
@@ -243,7 +243,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where card_number = #{cardNumber,jdbcType=CHAR}
+    where card_number = #{account,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="Card">
     update card
@@ -254,7 +254,7 @@
       acct = #{acct,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
-    where card_number = #{cardNumber,jdbcType=CHAR}
+    where card_number = #{account,jdbcType=CHAR}
   </update>
 
 </mapper>

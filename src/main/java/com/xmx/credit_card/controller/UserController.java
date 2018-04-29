@@ -5,6 +5,7 @@ import com.xmx.credit_card.dto.BillDTO;
 import com.xmx.credit_card.dto.PointDTO;
 import com.xmx.credit_card.entity.User;
 import com.xmx.credit_card.service.UserService;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,10 @@ public class UserController implements Serializable {
     @RequestMapping(value = "/list")
     public List<User> getUserList(){
         return userService.getUserList();
+    }
+    @RequestMapping(value = "/froze/{account}")
+    public void frozeAccount(@PathVariable(value = "account") String account){
+        userService.frozeUser(account);
     }
 
 

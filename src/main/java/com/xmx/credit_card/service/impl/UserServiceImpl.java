@@ -136,6 +136,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void frozeUser(String account) {
+        userMapper.frozeAccount(account);
+    }
+
+    @Override
     public List<User> getUserList() {
         return userMapper.getUserList();
     }

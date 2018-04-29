@@ -21,7 +21,7 @@ public class User {
 
     private LocalDateTime createTime;
 
-    private Boolean status;
+    private Boolean status =true;
 
     public Boolean getStatus() {
         return status;

@@ -30,7 +30,10 @@ public interface UserService {
 
     void addUser(User user);
 
+    void frozeUser(String account);
+
     Long getUserIdByAccount(String account);
 
     User getUserByAccount(String account);
+
 }

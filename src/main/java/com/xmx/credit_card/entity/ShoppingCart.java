@@ -9,7 +9,7 @@ public class ShoppingCart {
 
     private Long productId;
 
-    private Integer productNumber;
+    private Integer productNumber=1;
 
     private String acct;
 
