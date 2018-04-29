@@ -8,6 +8,7 @@ import com.xmx.credit_card.dao.CardMapper;
 import com.xmx.credit_card.entity.Card;
 import com.xmx.credit_card.entity.CardExample;
 import com.xmx.credit_card.service.CardService;
+import com.xmx.credit_card.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -19,7 +20,17 @@ import java.util.List;
 @Service
 public class CardServiceImpl implements CardService {
     @Autowired
-   private CardMapper cardMapper;
+    private CardMapper cardMapper;
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public void repayment(String cardNumber, BigDecimal amount) {
+        updateCardByCardNumber(cardNumber,getAmountByCardNumber(cardNumber).add(amount),null);
+        String account=getCardByCardNumber(cardNumber).getAcct();
+        userService.updateAmount(account,userService.getAmountByAccount(account).add(amount));
+    }
+
     @Override
     public List<Card> getCardListByCondition(String account, CardType cardType,CardStatus cardStatus) {
         CardExample example=new CardExample();
@@ -41,6 +52,22 @@ public class CardServiceImpl implements CardService {
             card.setStatus(CardStatus.ACTIVE);
         else
             card.setStatus(CardStatus.REJECTED);
+        cardMapper.updateByPrimaryKeySelective(card);
+    }
+
+    @Override
+    public Card getCardByCardNumber(String cardNumber) {
+        return cardMapper.selectByPrimaryKey(cardNumber);
+    }
+
+    @Override
+    public void updateCardByCardNumber(String cardNumber, BigDecimal amount,Integer point) {
+        Card card=new Card();
+        card.setCardNumber(cardNumber);
+        if(amount!=null)
+            card.setCardAmount(amount);
+        if(point!=null)
+            card.setCardPoint(point);
         cardMapper.updateByPrimaryKeySelective(card);
     }
 

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +17,8 @@ public interface GoodsMapper {
     Goods list();
 
     Goods getGoodsById(@Param("id") Long id);
+
+    void updateGooodsCount(@Param("id") Long id);
 
 
 }

@@ -8,6 +8,7 @@ import com.xmx.credit_card.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,13 @@ public class CardController {
         return cardService.applyCard(command);
     }
     @RequestMapping(value = "/approve")
-    public boolean approveCardApply(@RequestParam Boolean approve){
+    public boolean approveCardApply(@RequestParam String cardNumber,@RequestParam Boolean approve){
+        cardService.approveCardApply(cardNumber,approve);
         return true;
+    }
+    @RequestMapping(value = "/repayment")
+    public void repayment(@RequestParam(value = "cardNumber") String cardNumber, @RequestParam(value = "amount")BigDecimal amount){
+        cardService.repayment(cardNumber,amount);
     }
 
 }

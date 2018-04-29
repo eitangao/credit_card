@@ -9,9 +9,10 @@ id_card char(18) comment'身份证号',
 point int(10) comment'积分',
 amount numeric(10,2) comment'额度',
 id_pict varchar(50) comment'照片路径',
-create_time datetime default current_timestamp comment'创建时间',
+status tinyint(4) NOT NULL DEFAULT '1'comment'正常还是冻结',
+create_time datetime default current_timestamp comment '创建时间',
 primary key(id));
-insert into user(acct,pass_word) values('user1','12345678'),
-('user2','12345678'),
-('trump','12345678'),
-('obama','12345678');
+insert into user(acct,pass_word,status) values('user1','12345678',1),
+('user2','12345678',1),
+('trump','12345678',1),
+('obama','12345678',1);

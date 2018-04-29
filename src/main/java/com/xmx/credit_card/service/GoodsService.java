@@ -8,7 +8,12 @@ import com.xmx.credit_card.entity.Goods;
 import java.util.List;
 
 public interface GoodsService {
-    Goods findGoodsById();
+
+    Goods findGoodsById(Long id);
+
     List<Goods> getGoodsByCondition(ProductType productType, ApplicaplePeople applicaplePeople,String lowPrice,String highPrice,String orderBy,String order);
+
     void buyGoods(BuyGoodsCommand buyGoodsCommand);
+
+    void updateGoodsCount(Long id);
 }

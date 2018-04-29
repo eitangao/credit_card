@@ -15,10 +15,7 @@ import java.util.List;
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
-    @RequestMapping(value = "/test")
-    public Goods getGoodById(){
-        return goodsService.findGoodsById();
-    }
+
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public List<Goods> getGoodsListByCondition(@RequestParam(required = false) ProductType productType , @RequestParam(required = false) ApplicaplePeople applicaplePeople,
                                                @RequestParam(required = false) String lowPrice,@RequestParam(required = false) String highPrice,@RequestParam(required = false) String orderBy,

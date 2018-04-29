@@ -14,6 +14,12 @@ public interface CardService {
 
     BigDecimal getAmountByCardNumber(String cardNumber);
 
+    Card getCardByCardNumber(String cardNumber);
+
+    void updateCardByCardNumber(String cardNumber, BigDecimal amount,Integer point);
+
+    void repayment(String cardNumber,BigDecimal amount);
+
     boolean applyCard(CreateCardCommand command);
 
     void approveCardApply(String cardNumber,boolean approve);

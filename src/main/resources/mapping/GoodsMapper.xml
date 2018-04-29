@@ -47,5 +47,10 @@
     from goods
     where id =#{id}
   </select>
+  <update id="updateGoodsCount">
+    update goods
+    set count=(count+1)
+    where id= #{id,jdbcType=BIGINT}
+  </update>
 
 </mapper>
