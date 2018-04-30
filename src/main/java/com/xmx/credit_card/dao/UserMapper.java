@@ -24,7 +24,7 @@ public interface UserMapper {
             @Result(property = "createTime", column = "create_time")
     })
     User getUserByAccount(String  account);
-    @Select("select * from user}")
+    @Select("select * from user")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "account",column = "acct"),
