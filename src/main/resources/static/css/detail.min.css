@@ -1,0 +1,1516 @@
+@charset "UTF-8";
+
+.customer_service_hide,.detail_main_left,.detail_main_right,.float_panel li,.footer_nav,.right_goods_box li {
+    box-sizing: border-box
+}
+
+body,button,dd,dl,h1,h2,h3,h4,h5,h6,input,ol,p,select,textarea,ul {
+    padding: 0;
+    margin: 0
+}
+
+body {
+    font-family: "微软雅黑";
+    overflow-x: hidden
+}
+
+a {
+    text-decoration: none;
+    color: #666
+}
+
+li,ol,ul {
+    list-style: none
+}
+
+img {
+    border: 0;
+    vertical-align: middle
+}
+
+body,html {
+    height: 100%
+}
+
+button:focus,input:focus,textarea:focus {
+    outline: 0
+}
+
+button,input[type=button],input[type=submit],input[type=file],input[type=reset] {
+    cursor: pointer
+}
+
+.cl:after {
+    content: "";
+    display: block;
+    clear: both;
+    overflow: hidden;
+    height: 0;
+    visibility: hidden
+}
+
+.cl {
+    zoom: 1
+}
+
+.textoverflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.super_mask {
+    width: 100%;
+    height: 17400px;
+    background: rgba(0,0,0,.5);
+    position: absolute;
+    z-index: 1;
+    top: 245px;
+    display: none
+}
+
+header {
+    background: #fff
+}
+
+.customer_service {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -304px 0 no-repeat;
+    width: 57px;
+    height: 66px;
+    position: fixed;
+    right: 0;
+    top: 30%;
+    z-index: 2
+}
+
+.customer_service_hide {
+    width: 300px;
+    height: 180px;
+    position: relative;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,.15);
+    border-radius: 5px;
+    text-align: center;
+    right: 310px;
+    background: #fff;
+    font-size: 12px;
+    padding: 45px 0;
+    color: #666;
+    display: none
+}
+
+.customer_service_hide>i {
+    display: block;
+    width: 16px;
+    height: 14px;
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -206px -325px no-repeat;
+    position: absolute;
+    top: 14px;
+    right: -15px;
+    transform: rotate(90deg)
+}
+
+.customer_service_hide b {
+    color: #ccaa7a;
+    font-size: 20px;
+    margin-bottom: 7px
+}
+
+.customer_service_hide p {
+    margin-bottom: 40px
+}
+
+.customer_service_hide_bottom {
+    height: 150px;
+    border-top: 1px solid #ebebeb
+}
+
+.customer_service_hide_bottom span {
+    display: inline-block;
+    width: 49%;
+    height: 43px;
+    line-height: 43px
+}
+
+.customer_service_hide_bottom span:nth-child(1) {
+    color: #cc3d3d;
+    font-weight: 600
+}
+
+.float_panel {
+    position: fixed;
+    right: 0;
+    background: #fff;
+    top: 63%;
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.1);
+    z-index: 1
+}
+
+.float_panel li {
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    cursor: pointer
+}
+
+.float_panel i {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: auto;
+    position: relative;
+    font-style: normal;
+    text-align: right;
+    cursor: pointer
+}
+
+.float_panel .sc_num {
+    color: #fff;
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    background: #cc5252;
+    border-radius: 50%;
+    position: absolute;
+    line-height: 16px;
+    text-align: center;
+    top: 6px;
+    right: 5px
+}
+
+.sc_hide {
+    width: 260px;
+    position: fixed;
+    right: 0;
+    z-index: 100;
+    display: none;
+    height: 100%;
+    background: #f1f1f1;
+    border-left: 2px solid #333;
+    font-size: 12px
+}
+
+.sc_hide p {
+    padding: 0 10px;
+    line-height: 40px;
+    height: 40px
+}
+
+.sc_hide .p1 {
+    background: #fff;
+    border-bottom: 1px solid #ddd
+}
+
+.sc_hide .p2 {
+    background: #fff9ce;
+    line-height: 32px;
+    height: 32px
+}
+
+.sc_hide .p2 .sp1 {
+    color: #666
+}
+
+.sc_hide .p2 a {
+    display: inline-block;
+    color: #477db3;
+    font-size: 12px;
+    float: right
+}
+
+.sc_hide .cart_content {
+    margin: 120px auto auto;
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) 0 -296px no-repeat;
+    width: 55px;
+    height: 51px
+}
+
+.sc_hide .p3 {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+    color: #666
+}
+
+.sc_hide .p1 .sp1 {
+    float: left;
+    font-size: 14px;
+    font-weight: 700
+}
+
+.sc_hide .p1 .sp2 {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -97px -504px no-repeat;
+    width: 17px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    float: right;
+    margin-top: 12px
+}
+
+.float_panel li:nth-child(1) i {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -507px -382px no-repeat
+}
+
+.float_panel_hide {
+    width: 82px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 12px;
+    color: #333;
+    background: #f1f1f1;
+    position: absolute;
+    right: 34px;
+    top: -10px;
+    display: none
+}
+
+.float_panel li:nth-child(2) i {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -507px -246px no-repeat
+}
+
+.float_panel li:nth-child(3) i {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -469px -360px no-repeat
+}
+
+.float_panel li:nth-child(4) i {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -373px -462px no-repeat
+}
+
+.float_panel li:nth-child(4) i .float_panel_hide {
+    width: 180px;
+    height: 220px;
+    position: absolute;
+    top: -142px;
+    background: #f1f1f1;
+    box-sizing: border-box;
+    padding: 18px 10px 0
+}
+
+.float_panel li:nth-child(4) i .float_panel_hide p {
+    text-align: center
+}
+
+.float_panel li:nth-child(5) i {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -507px -178px no-repeat
+}
+
+.float_panel_left {
+    position: fixed;
+    left: 12px;
+    top: 25%;
+    width: 111px;
+    height: 500px;
+    display: none;
+    background: url(https://static.wbiao.co/p/pc/images/activity/shoubiaoj/nav.png) no-repeat
+}
+
+.float_panel_left a:first-child {
+    margin-top: 129px
+}
+
+.float_panel_left a {
+    display: block;
+    width: 111px;
+    color: #666;
+    line-height: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 1px
+}
+
+.slide_show {
+    position: absolute;
+    top: 245px
+}
+
+.slide_show img {
+    height: 428px
+}
+
+.slide_show ul {
+    width: 10500px;
+    font-size: 0;
+    position: relative
+}
+
+.slide_show li {
+    height: 430px;
+    width: 1500px;
+    display: inline-block
+}
+
+.slide_show .buttons {
+    position: relative;
+    left: 630px;
+    top: -50px
+}
+
+#button_active {
+    background: #fff
+}
+
+.slide_show button {
+    width: 30px;
+    height: 2px;
+    display: inline-block;
+    margin: 0 4px;
+    background: rgba(255,255,255,.3);
+    border: 0
+}
+
+header .top_banner i {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    font-style: normal;
+    color: #fff;
+    position: absolute;
+    top: 8px;
+    right: 150px;
+    cursor: pointer
+}
+
+header .top_banner {
+    margin: auto;
+    text-align: center;
+    background: #191f24;
+    width: 100%;
+    position: relative;
+    z-index: 1
+}
+
+.container,.red_border,.red_border a,.red_hide {
+    background: #fff
+}
+
+.container {
+    width: 1200px;
+    margin: auto
+}
+
+.top {
+    border-bottom: 1px solid #eee
+}
+
+.top ul a {
+    font-size: 12px;
+    color: #999
+}
+
+.top .left .r31 {
+    margin-right: 31px
+}
+
+.top ul li {
+    line-height: 29px
+}
+
+.top .left {
+    float: left
+}
+
+.top .right {
+    float: right
+}
+
+.top .left li {
+    float: left
+}
+
+.top .right li {
+    float: right;
+    padding: 0 6px
+}
+
+.top .right li a:hover {
+    color: #333
+}
+
+.red_border {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    position: relative
+}
+
+.red_hide {
+    border: 1px solid #ccc;
+    position: absolute;
+    right: -1px;
+    z-index: 0;
+    display: none
+}
+
+.red_hide img {
+    width: 126px;
+    height: 126px;
+    position: relative;
+    margin: 36px
+}
+
+.red_hide p {
+    background: #f1f1f1
+}
+
+.service_line,.top {
+    background: #fff
+}
+
+.red_hide span {
+    display: inline-block;
+    width: 96px;
+    font-size: 12px;
+    text-align: center;
+    color: #999
+}
+
+.red_hide img:nth-child(2) {
+    display: none
+}
+
+#red_active {
+    color: #333
+}
+
+.service_line {
+    border: 1px solid #fff;
+    position: relative;
+    right: -1px;
+    z-index: 0
+}
+
+.service_line_hide {
+    position: absolute;
+    right: -1px;
+    border: 1px solid #ccc;
+    width: 218px;
+    font-size: 12px;
+    color: #666;
+    background: #fff;
+    display: none
+}
+
+.logo,.top {
+    position: relative;
+    z-index: 1
+}
+
+.service_line_hide span {
+    display: inline-block;
+    margin: 10px 0
+}
+
+.service_line_hide p:first-child {
+    border-bottom: 1px solid #ccc
+}
+
+.service_line_hide p {
+    margin: 10px 30px
+}
+
+.top .right .string {
+    color: #e8e0e0;
+    width: 2px
+}
+
+.top .right .red {
+    color: #b92a34
+}
+
+.logo {
+    line-height: 110px
+}
+
+h1 {
+    float: left
+}
+
+.logo .search {
+    float: right;
+    margin-top: 46px
+}
+
+.logo .search .sc_num {
+    color: #fff;
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    background: #cc5252;
+    border-radius: 50%;
+    position: absolute;
+    line-height: 16px;
+    text-align: center;
+    top: 45px;
+    right: 0
+}
+
+nav,nav .subnav,nav .subnav dd,nav .topTitle {
+    position: relative
+}
+
+.logo .search a {
+    display: block;
+    width: 32px;
+    height: 32px;
+    float: right
+}
+
+.logo .search a:first-child {
+    background: url(../images/d.png) no-repeat;
+    color: #fff
+}
+
+.logo .search a:nth-child(2) {
+    margin-right: 20px;
+    background: url(../images/d.png) -48px 1px no-repeat
+}
+
+.logo .search input {
+    border: 0;
+    font-size: 12px;
+    color: #ccc;
+    width: 282px;
+    border-bottom: 1px solid #ddd;
+    line-height: 35px;
+    float: right
+}
+
+nav .topTitle .subnav>a:first-child,nav .topTitle>a {
+    font-size: 14px;
+    line-height: 38px;
+    display: inline-block
+}
+
+nav {
+    z-index: 1
+}
+
+nav .topTitle {
+    z-index: 1;
+    height: 42px
+}
+
+nav .topTitle>a {
+    font-weight: 900;
+    color: #333;
+    margin: 0 20px 4px
+}
+
+nav .topTitle>a:first-child {
+    margin-left: 238px
+}
+
+nav .topTitle .subnav>a:first-child {
+    font-weight: 100;
+    margin: 0 28px 0 0;
+    width: 186px;
+    background: #b32424;
+    color: #fff;
+    padding: 0 12px 4px;
+    position: relative
+}
+
+nav .topTitle .borderB:hover {
+    border-bottom: 4px solid #b32424;
+    margin-bottom: -4px
+}
+
+nav .subnav {
+    width: 210px;
+    top: -42px;
+    z-index: 1
+}
+
+nav .subnav i {
+    display: inline-block;
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -280px -325px no-repeat;
+    width: 14px;
+    height: 14px;
+    float: right;
+    margin-top: 14px
+}
+
+nav .subnav dd:nth-child(odd) {
+    background: #402d2d
+}
+
+nav .subnav dd:nth-child(even) {
+    background: #332424
+}
+
+nav .subnav dd,nav .subnav dd:not(:last-child):hover {
+    background: #fff
+}
+
+nav .subnav dd:not(:last-child):hover a,nav .subnav dd:not(:last-child):hover a:first-child {
+    color: #666
+}
+
+nav .subnav ul li p:hover {
+    color: #000
+}
+
+nav .subnav dd a:not(.not):hover {
+    text-decoration: underline
+}
+
+nav .subnav dd .recom a:hover {
+    color: #000;
+    text-decoration: none
+}
+
+nav .subnav dd {
+    padding: 0 12px;
+    width: 186px;
+    display: none
+}
+
+nav .subnav dd>a {
+    font-size: 11px;
+    color: #ccc
+}
+
+nav .subnav dd>span {
+    color: #ccc
+}
+
+nav .subnav dd>a:first-child {
+    color: #fff;
+    font-weight: 700;
+    line-height: 61px;
+    margin-right: 3px;
+    font-size: 12px
+}
+
+.detail_box {
+    position: absolute
+}
+
+nav .subnav .last {
+    height: 61px;
+    width: 186px
+}
+
+.childNav2,.childNav3,.childNav4,.childNav5,.childNav6,.subnav .childNav {
+    width: 688px;
+    height: 430px;
+    background: #fff;
+    padding: 0 45px;
+    left: 210px;
+    border-top: 2px solid #333;
+    border-right: 2px solid #333;
+    display: none;
+    margin-top: -2px;
+    position: absolute
+}
+
+.subnav .childNav {
+    top: 0
+}
+
+.childNav2 {
+    top: -61px
+}
+
+.childNav3 {
+    top: -122px
+}
+
+.childNav4 {
+    top: -183px
+}
+
+.childNav5 {
+    top: -244px
+}
+
+.childNav6 {
+    top: -305px
+}
+
+.childNav2>p,.childNav3>p,.childNav4>p,.childNav5>p,.childNav6>p,.childNav>p {
+    margin-top: 50px;
+    display: inline-block;
+    color: #99857a;
+    margin-right: 15px;
+    font-size: 12px;
+    position: absolute
+}
+
+.childNav ul,.childNav2 ul,.childNav3 ul,.childNav4 ul,.childNav5 ul,.childNav6 ul {
+    text-align: center;
+    padding-left: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px
+}
+
+.childNav li,.childNav2 li,.childNav3 li,.childNav4 li,.childNav5 li,.childNav6 li {
+    display: inline-block;
+    width: 22%;
+    text-align: center;
+    padding: 15px 0
+}
+
+.childNav li a>img,.childNav2 li a>img,.childNav3 li a>img,.childNav4 li a>img,.childNav5 li a>img,.childNav6 li a>img {
+    width: 100px;
+    height: 40px
+}
+
+.childNav li:first-child,.childNav2 li:first-child,.childNav3 li:first-child,.childNav4 li:first-child,.childNav5 li:first-child,.childNav6 li:first-child {
+    margin-top: 30px
+}
+
+.childNav li a p,.childNav2 li a p,.childNav3 li a p,.childNav4 li a p,.childNav5 li a p,.childNav6 li a p {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px
+}
+
+.childNav .recom,.childNav2 .recom,.childNav3 .recom,.childNav4 .recom,.childNav5 .recom,.childNav6 .recom {
+    margin-top: 21px;
+    float: left;
+    width: 590px;
+    line-height: 30px
+}
+
+.childNav .recom a,.childNav2 .recom a,.childNav3 .recom a,.childNav4 .recom a,.childNav5 .recom a,.childNav6 .recom a {
+    display: inline-block;
+    color: #666;
+    font-size: 12px
+}
+
+.childNav2>span,.childNav3>span,.childNav4>span,.childNav5>span,.childNav6>span,.childNav>span {
+    padding-right: 20px;
+    display: inline-block;
+    font-size: 12px;
+    color: #99857a;
+    margin-top: 29px;
+    float: left
+}
+
+.detail_content_p1,.detail_content_p1 span a {
+    font-size: 12px;
+    color: #666
+}
+
+.detail_content {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 50px
+}
+
+.detail_content_p1 {
+    height: 36px;
+    line-height: 36px;
+    background: #e8e8e8;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,.1)
+}
+
+.detail_content_p1>span:nth-of-type(1) {
+    float: left;
+    padding-left: 123px
+}
+
+.detail_content_p1>span:nth-of-type(2) {
+    float: right;
+    padding-right: 123px
+}
+
+.detail_main_left {
+    width: 210px;
+    float: left;
+    min-height: 100px;
+    overflow: hidden
+}
+
+.detail_main_left_slide {
+    width: 1050px;
+    font-size: 0;
+    position: relative
+}
+
+.detail_main_left_slide li {
+    float: left
+}
+
+.detail_main_left button {
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
+    border: 0;
+    background: #ddd;
+    margin: 10px 4px 0
+}
+
+.detail_main_left button:nth-of-type(1) {
+    margin-left: 70px
+}
+
+button.detail_slide_active {
+    background: #cc5252
+}
+
+.mian_left_rank {
+    font-size: 0;
+    margin-top: 30px;
+    border: 1px solid #ddd
+}
+
+.mian_left_rank .left_rank_tab span {
+    display: inline-block;
+    cursor: pointer;
+    color: #999;
+    font-size: 0;
+    font-size: 14px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    width: 104px;
+    background: #ddd
+}
+
+.mian_left_rank li {
+    font-size: 12px;
+    padding: 15px 12px
+}
+
+.mian_left_rank li span:nth-of-type(1) {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    text-align: center;
+    line-height: 26px;
+    margin-right: 15px
+}
+
+.mian_left_rank li:hover a span:nth-of-type(2) {
+    color: #000;
+    text-decoration: underline
+}
+
+.detail_main_right {
+    width: 980px;
+    float: left;
+    height: auto;
+    font-size: 12px;
+    color: #666
+}
+
+.main_right_search {
+    margin-left: 0px;
+    border: 1px solid #ddd
+}
+
+.search_toggle,.search_toggle_hide {
+    position: absolute;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    text-align: center
+}
+
+.search_left {
+    width: 80px;
+    text-indent: 12px;
+    font-weight: 700;
+    color: #333;
+    background: #fafafa;
+    float: left
+}
+
+.search_left li {
+    min-height: 41px;
+    line-height: 41px;
+    border-bottom: 1px solid #ddd
+}
+
+.search_right li,.search_toggle,.search_toggle_hide {
+    border-bottom: 1px solid #ddd;
+    line-height: 20px
+}
+
+
+.search_left_hide,.search_right_hide,.search_right_hide_more {
+    display: none
+}
+
+.search_toggle_hide {
+    width: 65px;
+    height: 26px;
+    background: #fff;
+    bottom: -27px;
+    left: 370px;
+    color: #999;
+    z-index: 1
+}
+
+.search_toggle_hide i {
+    display: inline-block;
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -576px -454px no-repeat;
+    width: 10px;
+    height: 10px;
+    color: #999
+}
+
+.search_toggle {
+    width: 254px;
+    height: 24px;
+    background: #fff;
+    bottom: -24px;
+    left: 280px;
+    color: #999
+}
+
+.search_toggle i {
+    display: inline-block;
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -576px -434px no-repeat;
+    width: 10px;
+    height: 10px;
+    color: #999
+}
+
+.search_right {
+    width: 81%;
+    float: left;
+    position: relative
+}
+
+.search_right li {
+    min-height: 41px;
+    position: relative;
+    width: 840px;
+    padding-right: 50px
+}
+
+.search_right li span {
+    display: inline-block;
+    margin: 10px 5px 10px 12px;
+    padding: 0 2px
+}
+
+.search_right li:not(:nth-of-type(3)) span:hover {
+    background: #cc5252;
+    border-radius: 2px;
+    color: #fff
+}
+
+.search_right li:not(:nth-of-type(3)) span:hover a {
+    color: #fff
+}
+
+.search_right_hide li span:hover {
+    background: #cc5252;
+    border-radius: 2px;
+    color: #fff
+}
+
+.search_right_hide li span:hover a {
+    color: #fff
+}
+
+.search_right>li:nth-of-type(1) span:first-child {
+    background: #cc5252;
+    border-radius: 2px;
+    color: #fff
+}
+
+.search_right>li:nth-of-type(1) span:first-child a {
+    color: #fff
+}
+
+.search_header {
+    background: #fafafa;
+    border-bottom: 1px solid #fff;
+    padding: 0 12px;
+    line-height: 33px
+}
+
+.search_right li input:nth-of-type(1) {
+    margin-left: 0
+}
+
+.search_right li input {
+    width: 55px;
+    height: 21px;
+    line-height: 21px;
+    font-size: 12px
+}
+
+.search_right li button:hover {
+    color: #cc5252;
+    border-color: #cc5252;
+    background: #fff
+}
+
+.search_right li button {
+    width: 52px;
+    height: 20px;
+    line-height: 17px;
+    border: 1px solid #ececec;
+    font-size: 12px;
+    position: absolute;
+    top: 11px;
+    right: 15px;
+    background: #ddd
+}
+
+.search_right li button.button_hide {
+    color: #cc5252;
+    border-color: #cc5252;
+    background: #fff
+}
+
+.search_right li button i {
+    display: inline-block;
+    background: url(https://www.wbiao.cn/public/images/list/icon2.png) -77px -22px no-repeat;
+    width: 12px;
+    height: 10px;
+    margin-top: 4px;
+    font-style: normal
+}
+
+.search_right .search_right_brand {
+    min-height: 20px
+}
+
+.search_right .search_right_brand span {
+    width: 110px;
+    height: 40px;
+    margin: 0;
+    padding-left: 12px;
+    line-height: 40px
+}
+
+.search_right_brand span a:hover {
+    background: #cc5252;
+    border-radius: 2px;
+    color: #fff
+}
+
+.right_goods .default a,.right_goods_list>li:not(:nth-of-type(5)):hover a {
+    color: #cc5252
+}
+
+.right_goods {
+    margin-top: 20px;
+    margin-left: 0px
+}
+
+.right_goods_list {
+    border-bottom: 1px solid #ddd
+}
+
+.right_goods_list>li {
+    float: left;
+    padding: 0 10px;
+    margin: 0 10px;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    border-bottom: 3px solid #fff
+}
+
+.right_goods .default,.right_goods_list>li:not(:nth-of-type(5)):hover {
+    font-weight: 700;
+    border-bottom: 3px solid #cc5252
+}
+
+.right_goods_list .goods_list_right {
+    float: right;
+    font-size: 13px
+}
+
+.goods_list_right i {
+    display: inline-block;
+    width: 6px;
+    height: 11px;
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -576px -474px no-repeat
+}
+
+.goods_list_right a {
+    padding: 0 4px
+}
+
+.goods_list_right a:nth-of-type(2) i {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -576px -516px no-repeat
+}
+
+.right_goods_box li {
+    float: left;
+    width: 236px;
+    height: 450px;
+    position: relative;
+    padding: 0 12px;
+    margin-right: 6px;
+    margin-bottom: 10px;
+    overflow: hidden
+}
+
+.right_goods_box li:hover {
+    box-shadow: 1px 1px 8px 1px rgba(0,0,0,.2)
+}
+
+.right_goods_box li img {
+    position: absolute;
+    left: 50%;
+    margin-left: -137.5px;
+    margin-top: 10px
+}
+
+.right_goods_box_text {
+    margin-top: 290px
+}
+
+.goods_box_price {
+    line-height: 18px;
+    margin-bottom: 10px
+}
+
+.right_goods_box_text span:nth-of-type(1) {
+    color: #333;
+    font-size: 18px;
+    display: inline-block;
+    float: left
+}
+
+.right_goods_box_text span:nth-of-type(2) {
+    float: right;
+    color: #999;
+    display: inline-block
+}
+
+.right_goods_box_text p {
+    height: 36px;
+    line-height: 18px;
+    margin-bottom: 8px;
+    overflow: hidden
+}
+
+.right_goods_box_text p a {
+    color: #666
+}
+
+.goods_box_store {
+    margin-bottom: 8px;
+    margin-top: 10px
+}
+
+.goods_box_store i {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    margin-bottom: -3px;
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -332px -504px no-repeat
+}
+
+.goods_box_store a {
+    color: #999
+}
+
+.goods_box_store p {
+    margin-top: 5px
+}
+
+.goods_box_store p span {
+    background: #cc5252;
+    color: #fff;
+    line-height: 18px;
+    padding: 0 7px;
+    border-radius: 100px
+}
+
+.goods_box_store>a:nth-of-type(2),.goods_box_store>a:nth-of-type(3) {
+    display: inline-block;
+    border: 1px solid #eee;
+    text-align: center;
+    line-height: 28px;
+    color: #333;
+    width: 49%;
+    margin-top: 10px
+}
+
+.goods_box_store a:nth-of-type(3) {
+    color: #cc5252
+}
+
+.right_goods_page {
+    text-align: center;
+    padding: 30px 0;
+    position: relative
+}
+
+.right_goods_page button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: 0;
+    margin: 0 2px
+}
+
+.right_goods_page button:hover {
+    background: #ddd
+}
+
+.right_goods_page button:nth-of-type(3) {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -507px 0 no-repeat;
+    position: absolute
+}
+
+.right_goods_floor {
+    padding: 0 12px
+}
+
+.right_goods_floor .floor_align {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px
+}
+
+.right_goods_floor .floor_align span:nth-of-type(1) {
+    font-weight: 900;
+    color: #666
+}
+
+.right_goods_floor .floor_align span:nth-of-type(2) {
+    float: right;
+    cursor: pointer
+}
+
+.right_goods_floor a {
+    padding: 0 5px;
+    line-height: 18px;
+    margin-top: 5px;
+    color: #999
+}
+
+.right_goods_floor li:nth-child(even) {
+    margin-bottom: 20px
+}
+
+.right_goods_floor a:hover {
+    color: #cc5252
+}
+
+footer {
+    background: #eee
+}
+
+.footer_ribbon {
+    text-align: center;
+    background: #fff
+}
+
+.footer_ribbon span {
+    display: inline-block;
+    width: 240px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    font-size: 14px
+}
+
+.footer_ribbon span i {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    margin-right: 8px;
+    vertical-align: middle
+}
+
+.footer_ribbon span .icon1 {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -409px -357px no-repeat
+}
+
+.footer_ribbon span .icon2 {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) 0 -414px no-repeat
+}
+
+.footer_ribbon span .icon3 {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -361px -357px no-repeat
+}
+
+.footer_ribbon span .icon4 {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -313px -357px no-repeat
+}
+
+.footer_ribbon span .icon5 {
+    background: url(https://www.wbiao.cn/public/sprites/a/a.png?152023319) -265px -357px no-repeat
+}
+
+.footer_nav {
+    color: #666;
+    width: 1200px;
+    margin: auto;
+    padding: 45px 0
+}
+
+.footer_service {
+    float: left
+}
+
+.footer_service li:nth-child(1) {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+    margin-bottom: 12px
+}
+
+.footer_service li:nth-child(2) {
+    font-size: 24px;
+    line-height: 24px;
+    color: #cc5252
+}
+
+.footer_service li:nth-child(3) {
+    color: #999;
+    line-height: 16px;
+    font-size: 12px;
+    margin-right: 5px
+}
+
+.footer_service li:nth-child(4) {
+    width: 132px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border: 1px solid #999;
+    border-radius: 100px;
+    margin-top: 16px
+}
+
+.footer_service li:nth-child(4) a {
+    font-weight: 700;
+    font-size: 12px;
+    color: #666
+}
+
+.footer_center {
+    margin-left: 50px;
+    float: left;
+    width: 520px
+}
+
+.footer_center dl {
+    float: left;
+    margin-right: 24px;
+    width: 80px
+}
+
+.footer_center dt {
+    font-size: 14px;
+    color: #666;
+    font-weight: 700;
+    margin-bottom: 13px
+}
+
+.footer_center dd a {
+    line-height: 28px;
+    color: #999;
+    font-size: 12px
+}
+
+.footer_bottom,.footer_bottom_top,.footer_bottom_top li a {
+    line-height: 20px;
+    font-size: 12px
+}
+
+.footer_right_code1 {
+    float: left;
+    text-align: center
+}
+
+.footer_right_code1 li {
+    font-size: 12px
+}
+
+.footer_right_code1 ul {
+    float: left
+}
+
+.code1_hover,.code2_hover,.code3_hover,.code4_hover {
+    float: left;
+    font-weight: 600;
+    padding-bottom: 3px;
+    margin: 0 10px
+}
+
+#border {
+    border-bottom: 2px solid #666;
+    margin-bottom: -2px
+}
+
+.footer_right_code1 img {
+    margin: 11px auto 8px;
+    width: 93px
+}
+
+.footer_right_code1 ul li {
+    cursor: pointer
+}
+
+.footer_right_code1 li:nth-child(4) {
+    display: none
+}
+
+.footer_bottom {
+    padding: 25px;
+    border-top: 1px solid #ddd;
+    color: #999
+}
+
+.footer_bottom a {
+    color: #555
+}
+
+.footer_bottom a:hover {
+    color: #000
+}
+
+.footer_bottom_top {
+    text-align: center;
+    margin: auto auto 30px;
+    color: #999
+}
+
+.footer_bottom_top li {
+    display: inline-block
+}
+
+.footer_bottom_top li a {
+    color: #999;
+    margin: 0 10px
+}
+
+.footer_bottom p {
+    text-align: center;
+    margin-bottom: 10px
+}
+
+.footer_bottom .secure {
+    text-align: center;
+    margin: 20px 0 10px
+}
+
+.footer_bottom .secure img:not(:last-child) {
+    margin-right: 20px
+}
+
+.footer_bottom .links {
+    text-align: center
+}
+
+.footer_bottom .links a {
+    color: #999
+}
+
+.footer_bottom .links a:hover {
+    color: #000
+}
+
+.footer_bottom .links a:not(:last-child) {
+    margin-right: 15px
+}
