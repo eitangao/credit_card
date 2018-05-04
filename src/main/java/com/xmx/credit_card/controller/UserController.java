@@ -27,7 +27,7 @@ public class UserController implements Serializable {
     }
     @RequestMapping(value="/login/{account}/{password}")
     public boolean login(@PathVariable(value = "account") String account,
-                            @PathVariable(value = "password") String password){
+                         @PathVariable(value = "password") String password){
         return userService.login(account,password);
     }
     //更新用户基本信息
