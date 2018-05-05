@@ -85,7 +85,7 @@ public class GoodsServiceImpl implements GoodsService {
         transaction.setAcct(buyGoodsCommand.getAccount());
         transaction.setAmount(goods.getPrice());
         transaction.setCardNumber(buyGoodsCommand.getCardNumber());
-        transaction.setProductId(buyGoodsCommand.getProductId());
+        transaction.setProduct(buyGoodsCommand.getProductId());
         transaction.setPoint(goods.getPoint());
         transaction.setCreateTime(LocalDateTime.now());
         transactionService.createTransaction(transaction);

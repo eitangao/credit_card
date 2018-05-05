@@ -13,7 +13,7 @@ public class Transaction {
 
     private String cardNumber;
 
-    private Long productId;
+    private Long product;
 
     private Integer point;
 
@@ -59,12 +59,12 @@ public class Transaction {
         this.cardNumber = cardNumber;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getProduct() {
+        return product;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProduct(Long product) {
+        this.product = product;
     }
 
     public LocalDateTime getCreateTime() {

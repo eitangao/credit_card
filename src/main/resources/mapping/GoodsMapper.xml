@@ -11,7 +11,7 @@
     <result column="count" jdbcType="INTEGER" property="count" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List"  >
     id, name, price, spoint, type as productType, application as applicaplePeople, count, create_time
   </sql>
   <select id="getGoodsByCondition" parameterType="Map" resultMap="Goods">

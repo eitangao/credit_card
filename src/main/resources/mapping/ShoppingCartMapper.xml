@@ -3,7 +3,7 @@
 <mapper namespace="com.xmx.credit_card.dao.ShoppingCartMapper" >
   <resultMap id="BaseResultMap" type="ShoppingCart" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_id" property="product" jdbcType="BIGINT" />
     <result column="product_number" property="productNumber" jdbcType="INTEGER" />
     <result column="acct" property="acct" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -103,7 +103,7 @@
   <insert id="insert" parameterType="ShoppingCart" >
     insert into shopping_cart (id, product_id, product_number, 
       acct, create_time)
-    values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productNumber,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{product,jdbcType=BIGINT}, #{productNumber,jdbcType=INTEGER},
       #{acct,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="ShoppingCart" >
@@ -112,7 +112,7 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="productId != null" >
+      <if test="product != null" >
         product_id,
       </if>
       <if test="productNumber != null" >
@@ -129,8 +129,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="productId != null" >
-        #{productId,jdbcType=BIGINT},
+      <if test="product != null" >
+        #{product,jdbcType=BIGINT},
       </if>
       <if test="productNumber != null" >
         #{productNumber,jdbcType=INTEGER},
@@ -155,8 +155,8 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.productId != null" >
-        product_id = #{record.productId,jdbcType=BIGINT},
+      <if test="record.product != null" >
+        product_id = #{record.product,jdbcType=BIGINT},
       </if>
       <if test="record.productNumber != null" >
         product_number = #{record.productNumber,jdbcType=INTEGER},
@@ -175,7 +175,7 @@
   <update id="updateByExample" parameterType="map" >
     update shopping_cart
     set id = #{record.id,jdbcType=BIGINT},
-      product_id = #{record.productId,jdbcType=BIGINT},
+      product_id = #{record.product,jdbcType=BIGINT},
       product_number = #{record.productNumber,jdbcType=INTEGER},
       acct = #{record.acct,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
@@ -186,8 +186,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="ShoppingCart" >
     update shopping_cart
     <set >
-      <if test="productId != null" >
-        product_id = #{productId,jdbcType=BIGINT},
+      <if test="product != null" >
+        product_id = #{product,jdbcType=BIGINT},
       </if>
       <if test="productNumber != null" >
         product_number = #{productNumber,jdbcType=INTEGER},
@@ -203,7 +203,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="ShoppingCart" >
     update shopping_cart
-    set product_id = #{productId,jdbcType=BIGINT},
+    set product_id = #{product,jdbcType=BIGINT},
       product_number = #{productNumber,jdbcType=INTEGER},
       acct = #{acct,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}

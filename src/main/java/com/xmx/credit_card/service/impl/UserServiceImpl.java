@@ -95,8 +95,8 @@ public class UserServiceImpl implements UserService {
         List<PointDetail> pointDetails=new ArrayList<>();
         for (Transaction transaction : transactions) {
             PointDetail detail=new PointDetail();
-            detail.setProductId(transaction.getProductId());
-            detail.setProductName(goodsService.findGoodsById(transaction.getProductId()).getName());
+            detail.setProductId(transaction.getProduct());
+            detail.setProductName(goodsService.findGoodsById(transaction.getProduct()).getName());
             detail.setPoint(transaction.getPoint());
             detail.setCreateTIme(transaction.getCreateTime());
             pointDetails.add(detail);
