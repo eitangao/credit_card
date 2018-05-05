@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="acct" property="acct" jdbcType="VARCHAR" />
-    <result column="card_number" property="account" jdbcType="CHAR" />
+    <result column="card_number" property="cardNumber" jdbcType="CHAR" />
     <result column="product" property="product" jdbcType="BIGINT" />
     <result column="point" property="point" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -107,7 +107,7 @@
       card_number, product, point, 
       create_time)
     values (#{id,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, #{acct,jdbcType=VARCHAR}, 
-      #{account,jdbcType=CHAR}, #{product,jdbcType=BIGINT}, #{point,jdbcType=INTEGER},
+      #{cardNumber,jdbcType=CHAR}, #{product,jdbcType=BIGINT}, #{point,jdbcType=INTEGER},
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="Transaction" >
@@ -122,7 +122,7 @@
       <if test="acct != null" >
         acct,
       </if>
-      <if test="account != null" >
+      <if test="cardNumber != null" >
         card_number,
       </if>
       <if test="product != null" >
@@ -145,8 +145,8 @@
       <if test="acct != null" >
         #{acct,jdbcType=VARCHAR},
       </if>
-      <if test="account != null" >
-        #{account,jdbcType=CHAR},
+      <if test="cardNumber != null" >
+        #{cardNumber,jdbcType=CHAR},
       </if>
       <if test="product != null" >
         #{product,jdbcType=BIGINT},
@@ -177,8 +177,8 @@
       <if test="record.acct != null" >
         acct = #{record.acct,jdbcType=VARCHAR},
       </if>
-      <if test="record.account != null" >
-        card_number = #{record.account,jdbcType=CHAR},
+      <if test="record.cardNumber != null" >
+        card_number = #{record.cardNumber,jdbcType=CHAR},
       </if>
       <if test="record.product != null" >
         product = #{record.product,jdbcType=BIGINT},
@@ -199,7 +199,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       amount = #{record.amount,jdbcType=DECIMAL},
       acct = #{record.acct,jdbcType=VARCHAR},
-      card_number = #{record.account,jdbcType=CHAR},
+      card_number = #{record.cardNumber,jdbcType=CHAR},
       product = #{record.product,jdbcType=BIGINT},
       point = #{record.point,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
@@ -216,8 +216,8 @@
       <if test="acct != null" >
         acct = #{acct,jdbcType=VARCHAR},
       </if>
-      <if test="account != null" >
-        card_number = #{account,jdbcType=CHAR},
+      <if test="cardNumber != null" >
+        card_number = #{cardNumber,jdbcType=CHAR},
       </if>
       <if test="product != null" >
         product = #{product,jdbcType=BIGINT},
@@ -235,7 +235,7 @@
     update event
     set amount = #{amount,jdbcType=DECIMAL},
       acct = #{acct,jdbcType=VARCHAR},
-      card_number = #{account,jdbcType=CHAR},
+      card_number = #{cardNumber,jdbcType=CHAR},
       product = #{product,jdbcType=BIGINT},
       point = #{point,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
