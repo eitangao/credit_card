@@ -5,7 +5,6 @@ import com.xmx.credit_card.dto.BillDTO;
 import com.xmx.credit_card.dto.PointDTO;
 import com.xmx.credit_card.entity.User;
 import com.xmx.credit_card.service.UserService;
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

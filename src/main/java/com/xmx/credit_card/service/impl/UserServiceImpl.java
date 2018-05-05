@@ -16,6 +16,7 @@ import com.xmx.credit_card.service.TransactionService;
 import com.xmx.credit_card.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -140,6 +141,7 @@ public class UserServiceImpl implements UserService {
         userMapper.frozeAccount(account);
     }
 
+    @Transactional
     @Override
     public List<User> getUserList() {
         return userMapper.getUserList();
