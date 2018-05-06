@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>Card</title>
 </head>
 <body>
@@ -25,10 +27,11 @@
 <div class="box cl inform">
     <div class="div-left">
         <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">卡片信息</p>
+        <div id = "box1"></div>
     </div>
 
     <div class="div-right">
-        <p>ssssss</p>
+        <div id = "box2"></div>
     </div>
 </div>
 
@@ -36,5 +39,35 @@
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script type="text/javascript">
+    if (sessionStorage.getItem('acct') != null)
+    {
+        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>"+ sessionStorage.getItem('acct') +"</p>");
+        $.ajax({
+            type:"post",
+            url:`card/list?account=${sessionStorage.getItem('acct')}`,
+            success:function(res){
+                if (res.length > 0){
+                    $("#box1").append("<table class='table table-hover'>");
+                    $("#box1").append("<tr><th>卡号</th><th>卡种</th><th>卡片余额</th><th>卡片积分</th><th>卡片状态</th><th>申请时间</th></tr>");
+                    for(var i = 0;i<res.length;i++){
+                        $("#box1").append("<tr><td>"+res[i].cardNumber+"</td>><td>"+"<tr><td>"+res[i].cardType+"</td>><td>"+"<tr><td>"+res[i].cardAmount+"</td>><td>"+
+                            "<tr><td>"+res[i].cardPoint+"</td>><td>"+"<tr><td>"+res[i].status+"</td>><td>"+"<tr><td>"+res[i].createTime+"</td>></tr>");
+                    }
+                    $("#box1").append("</table>");
+                }
+                else
+                {
+                    $("#box1").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px;'>尚未开通卡</p>");
+                }
+            }
+        })
+    }
+    else{
+        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>尚未登录</p>");
+    }
+
+
+</script>
 </body>
 </html>

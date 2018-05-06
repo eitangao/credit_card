@@ -86,6 +86,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public List<Integer> countCardGroupByCardType() {
+        return cardMapper.countCardGroupByCardType();
+    }
+
+    @Override
     public boolean applyCard(CreateCardCommand command) {
         if(!CollectionUtils.isEmpty(getCardListByCondition(command.getAccount(),command.getCardType(),CardStatus.ACTIVE)))
             throw new RuntimeException("You have already had the same card!");

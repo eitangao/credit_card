@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>Line</title>
 </head>
 <body>
@@ -23,12 +25,126 @@
 <br />
 
 <div class="box cl inform">
+    <div class="div-left">
+        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">消费曲线</p>
+        <div id = "box1"></div>
+    </div>
 
+    <div class="div-right">
+        <div id = "box2"></div>
+    </div>
 </div>
 
 <footer class="cl box">
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src = "js/macarons.js"></script>
+<script type="text/javascript">
+    if (sessionStorage.getItem('acct') != null)
+    {
+        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>"+ sessionStorage.getItem('acct') +"</p>");
+        $.ajax({
+            type:"post",
+            url:`transaction/list?account=${sessionStorage.getItem('acct')}`,
+            success:function(res){
+                if (res.length > 0){
+                    $("#box1").append("<div id='myChart' style='height: 350px; width:650px;'></div>");
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = echarts.init(document.getElementById('myChart'));
+                    var count = new Array();
+                    for(var i=0;i<res.length;i++){
+                        count.push(res[i]);
+                    }
+                    option = {
+                        title : {
+                            text : '消费曲线',
+                        },
+                        tooltip : {
+                            trigger: 'item',
+                            formatter : function (params) {
+                                var date = new Date(params.value[0]);
+                                data = date.getFullYear() + '-'
+                                    + (date.getMonth() + 1) + '-'
+                                    + date.getDate() + ' '
+                                    + date.getHours() + ':'
+                                    + date.getMinutes();
+                                return data + '<br/>'
+                                    + params.value[1] + ', '
+                                    + params.value[2];
+                            }
+                        },
+                        toolbox: {
+                            show : true,
+                            feature : {
+                                mark : {show: true},
+                                dataView : {show: true, readOnly: false},
+                                restore : {show: true},
+                                saveAsImage : {show: true}
+                            }
+                        },
+                        dataZoom: {
+                            show: true,
+                            start : 70
+                        },
+                        legend : {
+                            data : ['花销']
+                        },
+                        grid: {
+                            y2: 80
+                        },
+                        xAxis : [
+                            {
+                                type : 'time',
+                                splitNumber:10
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value'
+                            }
+                        ],
+                        series : [
+                            {
+                                name: '花销',
+                                type: 'line',
+                                showAllSymbol: true,
+                                symbolSize: function (value){
+                                    return Math.round(value[2]/10) + 2;
+                                },
+                                data: (function () {
+                                    var d = [];
+                                    var len = 0;
+                                    var now = new Date();
+                                    var value;
+                                    while (len++ < 200) {
+                                        d.push([
+                                            new Date(2014, 9, 1, 0, len * 10000),
+                                            (Math.random()*30).toFixed(2) - 0,
+                                            (Math.random()*100).toFixed(2) - 0
+                                        ]);
+                                    }
+                                    return d;
+                                })()
+                            }
+                        ]
+                    };
+                    // 为echarts对象加载数据
+                    myChart.setOption(option);
+                }
+                else
+                {
+                    $("#box1").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px;'>无消费记录</p>");
+                }
+            }
+        })
+    }
+    else{
+        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>尚未登录</p>");
+    }
+
+
+</script>
 </body>
 </html>

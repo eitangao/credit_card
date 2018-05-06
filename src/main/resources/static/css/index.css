@@ -41,7 +41,7 @@ footer{background-color: transparent!important;font-size:12px;text-align: center
 .per-left{width: 320px; height:360px;border-right: 1px solid #dadada;float: left;}
 .per-right{float: left;width: 658px;height:360px;}
 .div-left{width: 658px; height:auto;float: left;}
-.div-right{float: left;width: 320px;height:auto;}
+.div-right{float: left;width: 280px;height:auto;padding-left: 40px}
 .midchange{width: 513px;height: 210px;float: left; position: relative;background-color: white!important;}
 .checkbox img{float: left;cursor: pointer;}
 .information {

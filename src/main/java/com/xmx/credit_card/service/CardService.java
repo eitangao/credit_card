@@ -26,4 +26,6 @@ public interface CardService {
 
 
     void deleteCard(String cardNumber);
+
+    List<Integer> countCardGroupByCardType();
 }
