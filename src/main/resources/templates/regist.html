@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>regist</title>
 </head>
 <body>
@@ -65,5 +66,24 @@
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script type="text/javascript">
+    var regist = document.getElementById("regist");
+
+    regist.onclick = function(e){
+        e.preventDefault();
+        $.ajax({
+            type:"post",
+            url:`user/register/${$("#acct1").val()}/${$("#pwd1").val()}`,
+            success:function(res){
+                if (res){
+                    self.location = 'login';
+                }
+                else{
+                    alert("账户已存在");
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

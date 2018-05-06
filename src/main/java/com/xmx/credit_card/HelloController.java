@@ -61,5 +61,9 @@ public class HelloController {
     public String shoppingcart(){
         return "shoppingcart";
     }
+    @RequestMapping(value = "/manager")
+    public String manager(){
+        return "manager";
+    }
 
 }

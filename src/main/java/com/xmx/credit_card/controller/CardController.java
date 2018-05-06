@@ -35,4 +35,9 @@ public class CardController {
         cardService.repayment(cardNumber,amount);
     }
 
+    @RequestMapping(value = "/countcard")
+    public List<Integer> countCardGroupByCardType(){
+        return cardService.countCardGroupByCardType();
+    }
+
 }

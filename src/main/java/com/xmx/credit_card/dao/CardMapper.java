@@ -6,6 +6,7 @@ import com.xmx.credit_card.entity.Card;
 import com.xmx.credit_card.entity.CardExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 @Mapper
@@ -32,4 +33,7 @@ public interface CardMapper {
     int updateByPrimaryKeySelective(Card record);
 
     int updateByPrimaryKey(Card record);
+
+    @Select("select count(*)  from card group by card_type")
+    List<Integer> countCardGroupByCardType();
 }

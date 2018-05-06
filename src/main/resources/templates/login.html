@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="box cl header">
-    <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />z`
+    <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
     <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="div-right">
-            <div id="box1"></div>>
+            <div id="box1"></div>
         </div>
     </div>
 </div>
@@ -60,14 +60,29 @@
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
 <script type="text/javascript">
-
-            $.ajax({
-                type:"post",
-                url:"user/login",
-                success:function(res){
-                    $("#box1").append();
-                }
-            })
+     var login = document.getElementById("login");
+     $("#box1").append("<p id='accted'style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>尚未登录</p>");
+     if (sessionStorage.getItem('acct') != null)
+     {
+         document.getElementById('accted').innerText = sessionStorage.getItem('acct');
+     }
+     login.onclick = function(e){
+         e.preventDefault();
+         $.ajax({
+             type:"post",
+             url:`user/login/${$("#acct").val()}/${$("#pwd").val()}`,
+             success:function(res){
+                 if (res){
+                     sessionStorage.setItem('acct',$("#acct").val());
+                     document.getElementById('accted').innerText = sessionStorage.getItem('acct');
+                     self.location = 'index';
+                 }
+                 else{
+                     alert("用户名或密码错误");
+                 }
+             }
+         })
+     }
 
 </script>
 </body>
