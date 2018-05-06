@@ -18,4 +18,6 @@ public interface GoodsService {
     void updateGoodsCount(Long id);
 
     List<Goods> getHotGoods(String account);
+
+    void insert(Goods goods);
 }

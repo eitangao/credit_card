@@ -13,11 +13,14 @@ import java.util.Map;
 public interface GoodsMapper {
 
     List<Goods> getGoodsByCondition(Map map);
+
     Goods list();
 
     Goods getGoodsById(@Param("id") Long id);
 
     void updateGooodsCount(@Param("id") Long id);
+
+    void insert(Goods goods);
 
 
 
