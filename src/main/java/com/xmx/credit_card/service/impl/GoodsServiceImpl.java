@@ -175,6 +175,8 @@ public class GoodsServiceImpl implements GoodsService {
             Double hotType=typeCoefficient.get(hotProduct.getProductType());
             if(hotType!=null)
                 hotProduct.setHotType(hotType);
+            else
+                hotProduct.setHotType(0.1);
             Double price=hotProduct.getPrice().doubleValue();
             if(price>highAmount)
                 if(price<highAmount*1.9){
@@ -193,7 +195,7 @@ public class GoodsServiceImpl implements GoodsService {
             }
             else
                 hotProduct.setPurchasingPower(1.0);
-            hotProduct.setFinalPoint(hotProduct.getHotPoint()*hotProduct.getHotType()*hotProduct.getPurchasingPower());
+            hotProduct.setFinalPoint(hotProduct.getHotPoint()*(1+hotProduct.getHotType())*hotProduct.getPurchasingPower());
         }
         hotProductList.sort((HotProduct h1,HotProduct h2)->h2.getFinalPoint().compareTo(h1.getFinalPoint()));
         List<Goods> hotGoods=new ArrayList<>();
