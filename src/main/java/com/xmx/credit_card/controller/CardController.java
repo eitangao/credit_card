@@ -35,4 +35,34 @@ public class CardController {
         cardService.repayment(cardNumber,amount);
     }
 
+    @RequestMapping(value = "/countcard")
+    public List<Integer> countCardGroupByCardType(){
+        return cardService.countCardGroupByCardType();
+    }
+
+    @RequestMapping(value = "/cardstatus")
+    public Card getCardByCardNumber(@RequestParam(value = "cardNumber") String cardNumber){
+        return cardService.getCardByCardNumber(cardNumber);
+    }
+
+    @RequestMapping(value = "/opencarduser")
+    public List<Integer> countCardGroupByAcct(){
+        return cardService.countCardGroupByAcct();
+    }
+
+    @RequestMapping(value = "/sumpoint")
+    public List<Integer> sumCardPointByCard(@RequestParam(value = "account") String account){
+        return cardService.sumCardPointByCard(account);
+    }
+
+    @RequestMapping(value = "/repay")
+    public void eventRepay(@RequestParam(value = "cardNumber") String cardNumber,@RequestParam(value = "point") Integer point,@RequestParam(value = "amount") BigDecimal amount){
+        cardService.eventRepay(cardNumber,point,amount);
+    }
+
+    @RequestMapping(value = "/play")
+    public void play(@RequestParam(value = "cardNumber") String cardNumber,@RequestParam(value = "point") Integer point){
+        cardService.play(cardNumber,point);
+    }
+
 }

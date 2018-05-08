@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>Line</title>
 </head>
 <body>
@@ -13,22 +15,106 @@
     <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
 <div class="box cl inform">
-
+        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">消费曲线</p>
+        <div id = "box1"></div>
 </div>
 
 <footer class="cl box">
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src = "js/macarons.js"></script>
+<script type="text/javascript">
+    if (sessionStorage.getItem('acct') != null)
+    {
+        document.getElementById("p").innerText=sessionStorage.getItem('acct');
+        $.ajax({
+            type:"post",
+            url:`transaction/list?account=${sessionStorage.getItem('acct')}`,
+            success:function(res){
+                if (res.length > 0){
+                    $("#box1").append("<div id='myChart' style='height: 400px; width:950px;'></div>");
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = echarts.init(document.getElementById('myChart'));
+                    var average = 0;
+                    for (var i=0;i<res.length;i++){
+                        average+=res[i].amount;
+                    }
+                    average=average/res.length;
+                    option = {
+                        title : {
+                            text: '购买记录',
+                        },
+                        tooltip : {
+                            trigger: 'axis'
+                        },
+                        toolbox: {
+                            show : true,
+                            feature : {
+                                mark : {show: true},
+                                dataView : {show: true, readOnly: false},
+                                magicType : {show: true, type: ['line', 'bar']},
+                                restore : {show: true},
+                                saveAsImage : {show: true}
+                            }
+                        },
+                        calculable : true,
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data: (function () {
+                                    var d = [];
+                                    for(var j=0;j<res.length;j++) {
+                                        d.push([
+                                            res[j].id
+                                        ]);
+                                    }
+                                    return d;
+                                })(),
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value'
+                            }
+                        ],
+                        series : [
+                            {
+                                type:'line',
+                                data: (function () {
+                                    var d = [];
+                                    for(var k=0;k<res.length;k++) {
+                                        d.push([
+                                            res[k].amount
+                                        ]);
+                                    }
+                                    return d;
+                                })()
+                            }
+                        ]
+                    };
+                    // 为echarts对象加载数据
+                    myChart.setOption(option);
+                }
+                else
+                {
+                    $("#box1").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px;'>无消费记录</p>");
+                }
+            }
+        })
+    }
+
+
+</script>
 </body>
 </html>

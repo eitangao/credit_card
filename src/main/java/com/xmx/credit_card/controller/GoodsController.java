@@ -26,4 +26,9 @@ public class GoodsController {
     public void buyGoods(@RequestBody BuyGoodsCommand buyGoodsCommand){
         goodsService.buyGoods(buyGoodsCommand);
     }
+
+    @RequestMapping(value = "/recommend")
+    public List<Goods> getHotGoods(@RequestParam String account){
+        return goodsService.getHotGoods(account);
+    }
 }

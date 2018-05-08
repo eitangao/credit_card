@@ -4,6 +4,7 @@ import com.xmx.credit_card.command.CreateCardCommand;
 import com.xmx.credit_card.constant.CardStatus;
 import com.xmx.credit_card.constant.CardType;
 import com.xmx.credit_card.entity.Card;
+import org.apache.ibatis.annotations.Select;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,4 +27,10 @@ public interface CardService {
 
 
     void deleteCard(String cardNumber);
+
+    List<Integer> countCardGroupByCardType();
+    List<Integer> countCardGroupByAcct();
+    List<Integer> sumCardPointByCard(String account);
+    void eventRepay(String cardNumber, Integer point, BigDecimal amount);
+    void play(String cardNumber, Integer point);
 }

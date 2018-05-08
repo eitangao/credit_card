@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>regist</title>
 </head>
 <body>
@@ -14,56 +15,85 @@
     <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
 <div class="box cl inform">
-    <div class="box cl inform">
-        <div class="div-left">
+        <div class="div-left"  style="text-align: center">
             <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">注册新账户</p>
-            <div class="console">
+            <form class="form-inline">
                 <div class="form-group">
-                    <label for="acct1" class="col-sm-2 control-label" style="font-size:15px;">用户名</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="acct1" id="acct1" placeholder="acct">
-                    </div>
+                    &nbsp&nbsp&nbsp
+                    <label for="acct1" >用户名</label>
+                        <input type="text" class="form-control" name="acct1" id="acct1" placeholder="acct" style="width:350px">
                 </div>
+            </form>
+            <br/><br/>
+                <form class="form-inline">
                 <div class="form-group">
-                    <label for="pwd1" class="col-sm-2 control-label" style="font-size:15px;">密码</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" name="pwd1" id="pwd1" placeholder="Password">
-                    </div>
+                    &nbsp&nbsp&nbsp
+                    <label for="pwd1" >密码</label>&nbsp&nbsp&nbsp
+                        <input type="password" class="form-control" name="pwd1" id="pwd1" placeholder="Password" style="width:350px">
                 </div>
+                </form>
+            <br/><br/>
                 <div class="form-group">
-                    <label for="pwdinsure" class="col-sm-2 control-label" style="font-size:15px;">确认密码</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" name="pwdinsure" id="pwdinsure" placeholder="Password">
-                    </div>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <button id="regist" class="btn btn-default" style="width:80px;">注册</button>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button id="regist" class="btn btn-default">注册</button>
-                    </div>
-                </div>
-            </div>
+            <br/><br/>
         </div>
 
         <div class="div-right">
-            <p>ssssss</p>
+            <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">网站用户</p>
+            <table class="table table-hover">
+                <tr>
+                    <th>累计注册</th>
+                    <td id="people"></td>
+                </tr>
+            </table>
+
         </div>
-    </div>
 </div>
 
 <footer class="cl box">
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script type="text/javascript">
+    var regist = document.getElementById("regist");
+    if (sessionStorage.getItem('acct') != null)
+    {
+        document.getElementById('p').innerText = sessionStorage.getItem('acct');
+    }
+    $.ajax({
+        type:"post",
+        url:`user/list`,
+        success:function(res){
+            document.getElementById('people').innerText = res.length;
+        }
+    })
+    regist.onclick = function(e){
+        e.preventDefault();
+        $.ajax({
+            type:"post",
+            url:`user/register/${$("#acct1").val()}/${$("#pwd1").val()}`,
+            success:function(res){
+                if (res){
+                    sessionStorage.setItem('acct1',$("#acct").val());
+                    self.location = 'login';
+                }
+                else{
+                    alert("账户已存在");
+                }
+            }
+        })
+    }
+</script>
 </body>
 </html>

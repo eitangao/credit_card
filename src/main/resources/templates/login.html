@@ -12,62 +12,161 @@
 </head>
 <body>
 <div class="box cl header">
-    <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />z`
+    <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
 <div class="box cl inform">
-    <div class="box cl inform">
-        <div class="div-left">
+        <div class="div-left" style="text-align: center">
             <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">账户登录</p>
 
-            <form class="form-horizontal">
+            <form class="form-inline">
+                &nbsp&nbsp&nbsp
                 <div class="form-group">
-                    <label for="acct" class="col-sm-2 control-label"; style="font-size:15px;">用户名</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="acct" id="acct" placeholder="acct">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="pwd" class="col-sm-2 control-label" style="font-size:15px;">密码</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button id="login" class="btn btn-default">登录</button>
-                    </div>
+                    <label for="acct">用户名</label>
+                        <input type="text" class="form-control" name="acct" id="acct" placeholder="account" style="width:350px">
                 </div>
             </form>
+            <br/><br/>
+            <form class="form-inline">
+                &nbsp&nbsp&nbsp
+                <div class="form-group">
+                    <label for="pwd">密码</label>&nbsp&nbsp&nbsp
+                        <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" style="width:350px">
+                </div>
+
+            </form>
+            <br/><br/>
+            <div class="form-group">
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button id="login" class="btn btn-default" style="width:80px;">登录</button>
+            </div>
+            <br/><br/>
         </div>
 
         <div class="div-right">
-            <div id="box1"></div>>
+            <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">用户开卡情况</p>
+            <div id="myChart" style="margin-left:-10px;height: 244px; width:300px;margin-top:-23px"></div>
         </div>
-    </div>
 </div>
 <footer class="cl box">
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src = "js/macarons.js"></script>
 <script type="text/javascript">
+     var login = document.getElementById("login");
+     var usercount=0;
+     var opencardcount=0;
+     var cardcount=0;
+     if (sessionStorage.getItem('acct') != null)
+     {
+         document.getElementById('p').innerText = sessionStorage.getItem('acct');
+     }
+     // 基于准备好的dom，初始化echarts图表
+     var myChart = echarts.init(document.getElementById('myChart'));
+     $.ajax({
+         type:"post",
+         url:`user/list`,
+         success:function(res){
+             usercount = res.length;
+             $.ajax({
+                 type:"post",
+                 url:`card/opencarduser`,
+                 success:function(res){
+                     opencardcount = res.length;
+                     for(var i=0;i<res.length;i++)
+                     {
+                         cardcount+=res[i];
+                     }
+                     option = {
+                         tooltip : {
+                             trigger: 'item',
+                             formatter: "{b}: {c}"
+                         },
+                         toolbox: {
+                             show : false,
+                             feature : {
+                                 mark : {show: true},
+                                 dataView : {show: true, readOnly: false},
+                                 restore : {show: true},
+                                 saveAsImage : {show: true}
+                             }
+                         },
+                         calculable : false,
+                         series : [
+                             {
+                                 name:'韦恩图',
+                                 type:'venn',
+                                 itemStyle: {
+                                     normal: {
+                                         label: {
+                                             show: true,
+                                             textStyle: {
+                                                 fontFamily: 'Arial, Verdana, sans-serif',
+                                                 fontSize: 16,
+                                                 fontStyle: 'italic',
+                                                 fontWeight: 'bolder'
+                                             }
+                                         },
+                                         labelLine: {
+                                             show: false,
+                                             length: 10,
+                                             lineStyle: {
+                                                 // color: 各异,
+                                                 width: 1,
+                                                 type: 'solid'
+                                             }
+                                         }
+                                     },
+                                     emphasis: {
+                                         color: '#cc99cc',
+                                         borderWidth: 3,
+                                         borderColor: '#996699'
+                                     }
+                                 },
+                                 data:[
+                                     {value:cardcount, name:'卡产品'},
+                                     {value:usercount, name:'用户'},
+                                     {value:opencardcount, name:'开卡用户'}
+                                 ]
+                             }
+                         ]
+                     };
 
-            $.ajax({
-                type:"post",
-                url:"user/login",
-                success:function(res){
-                    $("#box1").append();
-                }
-            })
+                     // 为echarts对象加载数据
+                     myChart.setOption(option);
+                 }
+             })
+         }
+     })
+
+
+     login.onclick = function(e){
+         e.preventDefault();
+         $.ajax({
+             type:"post",
+             url:`user/login/${$("#acct").val()}/${$("#pwd").val()}`,
+             success:function(res){
+                 if (res){
+                     sessionStorage.setItem('acct',$("#acct").val());
+                     document.getElementById('accted').innerText = sessionStorage.getItem('acct');
+                     self.location = 'index';
+                 }
+                 else{
+                     alert("用户名或密码错误");
+                 }
+             }
+         })
+     }
 
 </script>
 </body>

@@ -16,4 +16,8 @@ public interface GoodsService {
     void buyGoods(BuyGoodsCommand buyGoodsCommand);
 
     void updateGoodsCount(Long id);
+
+    List<Goods> getHotGoods(String account);
+
+    void insert(Goods goods);
 }

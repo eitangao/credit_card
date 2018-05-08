@@ -6,29 +6,158 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/stories.css" />
+	<style type="text/css">
+		.sc_btn{cursor: pointer;margin-top: 140px; line-height: 42px; color: white;text-align: center;background: #c1b497;}
+		.sc_btn:hover {background: #d5cab4;}
+		.form-left img{width: 100%; cursor: move;}
+		#bigger{width: 300px;height: 300px;position: fixed;top: 200px;left: 200px;z-index: 10;overflow: hidden;display: none;}
+		#bigger img{width: 200%;height: 200%;position: relative;left: -100px;top: -100px;}
+	</style>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
+	<script src = "js/jquery.cookie.js"></script>
+    		<script type="text/javascript">
+			$(function(){
+				$.ajax({
+					type:"get",
+					url:"code/maingoods.json",
+					async:true,
+					success:function(res){
+//						sc_car();
+						var _search = location.search.substring(4);
+						$("#img_search").append("<img src= " + res[_search].img1 + ">");
+						$("#bigger").append("<img src= " + res[_search].img1 + ">");
+						$("#title_search").append("<h3>" + res[_search].title + "</h3>");
+						$("h3").after("<p style='line-height:50px;'>" + res[_search].price + "</p>");
+						$("#title_search").append("<div class='sc_btn' id='" + _search + "'>立即购买</div>")
+						$(".sc_btn").click(function(){
+							var id = this.id;
+							var first = $.cookie("goods") == null ? true : false;
+							if(first){
+								$.cookie("goods", "[{id:'" + id + "',num:1}]", {
+									expires:7
+								});	
+							}else{
+								var str = $.cookie("goods");
+								console.log(str)
+								var arr = eval(str);
+								var same = false;
+								for(var i in arr){
+									if(arr[i].id == id){
+										arr[i].num = arr[i].num + 1;
+										var cookieStr = JSON.stringify(arr);
+										$.cookie("goods",cookieStr,{
+											expires:7
+										});
+										same = true;
+										break;
+									}
+								}
+								if(!same){
+									var obj = {id:id,num:1};
+									arr.push(obj);
+									var cookieStr = JSON.stringify(arr);
+									$.cookie("goods",cookieStr,{
+										expires:7
+									});
+								}
+							}
+							sc_car()
+//							return false;
+						})
+						function sc_car(){
+							var sc_str = $.cookie("goods");
+							if(sc_str){
+								var sc_arr = eval(sc_str);
+								var sc_num = 0;
+								for(var i in sc_arr){
+									sc_num = Number(sc_arr[i].num) + sc_num;
+								}
+								$("#shoppingBag").html("购物袋(" + sc_num + ")")
+							}
+						}
+						$("title").html(res[_search].title);
+						var oSearch = document.getElementById("img_search");
+						var oImg = oSearch.getElementsByTagName("img");
+						var oForm = document.getElementsByClassName("form")[0];
+						oImg[0].onmouseover = function(){
+							oImg[0].onmousemove = function(event){
+								var e = event || window.event;
+								var oBigger = document.getElementById("bigger");								
+								console.log(oForm.offsetTop + 66)
+								oBigger.style.display = "block"
+								oBigger.style.left = e.clientX + 15 + "px";
+								oBigger.style.top = e.clientY + 15 + "px";
+								var oSmallImg = oBigger.getElementsByTagName("img")[0];
+								oSmallImg.style.left = - (e.pageX - (oForm.offsetLeft + 37)) * 2 + "px";
+								oSmallImg.style.top = - (e.pageY - (oForm.offsetTop + 66)) * 2 + "px";
+							}
+						}							
+						oImg[0].onmouseleave = function(){
+							var oBigger = document.getElementById("bigger");
+							oBigger.style.display = "none";
+						}
+					}					
+				});
+				
+			})
+		</script>
     <title>gooddetail</title>
 </head>
-<body>
+<body style="background-color:#e7e7e7!important ;">
 <div class="box cl header">
     <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index">首页</a></li>
         <li> <a href="Goods"class="active">商品市场</a></li>
-        <li> <a href="point" >积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
-<div class="box cl inform">
 
-</div>
+
+		<div class="cl loginn">
+			<div class="insert">
+				商品详情
+			</div>
+			<div class="form">
+				<div class="form-left" id="img_search">
+					
+					
+					
+				</div>
+				<div id="bigger"  style="z-index: 1000;">
+					
+				</div>
+				<div class="form-right" id="title_search">
+					
+					
+					
+				</div>
+			</div>
+		
+		
+		
+		
+		</div>
+		<div id="shopthing">
+			<ul>
+			</ul>
+		</div>
+
 
 <footer class="cl box">
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script>
+    if (sessionStorage.getItem('acct') != null) {
+        document.getElementById("p").innerText=sessionStorage.getItem('acct');
+    }
+</script>
 </body>
 </html>
