@@ -61,6 +61,16 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public void eventRepay(String cardNumber, Integer point, BigDecimal amount){
+        cardMapper.eventRepay(cardNumber,point,amount);
+    }
+
+    @Override
+    public void play(String cardNumber, Integer point){
+        cardMapper.play(cardNumber,point);
+    }
+
+    @Override
     public void updateCardByCardNumber(String cardNumber, BigDecimal amount,Integer point) {
         Card card=new Card();
         card.setCardNumber(cardNumber);
@@ -90,6 +100,15 @@ public class CardServiceImpl implements CardService {
         return cardMapper.countCardGroupByCardType();
     }
 
+    @Override
+    public List<Integer> sumCardPointByCard(String account) {
+        return cardMapper.sumCardPointByCard(account);
+    }
+
+    @Override
+    public List<Integer> countCardGroupByAcct() {
+        return cardMapper.countCardGroupByAcct();
+    }
     @Override
     public boolean applyCard(CreateCardCommand command) {
         if(!CollectionUtils.isEmpty(getCardListByCondition(command.getAccount(),command.getCardType(),CardStatus.ACTIVE)))

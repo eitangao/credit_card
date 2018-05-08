@@ -12,14 +12,13 @@
 </head>
 <body>
 <div class="box cl header">
-    <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
+    <img style="float: left;margin-right: 50px;" src="images/logo.jpg" href="index" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
@@ -31,7 +30,8 @@
     </div>
 
     <div class="div-right">
-        <div id = "box2"></div>
+        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">支付比例</p>
+        <div id="myChart" style="margin-left:-75px;height: 264px; width:390px;margin-top:-23px"></div>
     </div>
 </div>
 
@@ -39,22 +39,95 @@
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+
+<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src = "js/macarons.js"></script>
 <script type="text/javascript">
+
     if (sessionStorage.getItem('acct') != null)
     {
-        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>"+ sessionStorage.getItem('acct') +"</p>");
+        document.getElementById("p").innerText=sessionStorage.getItem('acct');
         $.ajax({
             type:"post",
             url:`card/list?account=${sessionStorage.getItem('acct')}`,
             success:function(res){
                 if (res.length > 0){
-                    $("#box1").append("<table class='table table-hover'>");
-                    $("#box1").append("<tr><th>卡号</th><th>卡种</th><th>卡片余额</th><th>卡片积分</th><th>卡片状态</th><th>申请时间</th></tr>");
+                    $("#box1").append("<table id='table1 'class='table table-hover'></table>");
+                    $(".table").eq(0).append("<tr><th>卡号</th><th>卡种</th><th>卡片余额</th><th>申请时间</th></tr>");
                     for(var i = 0;i<res.length;i++){
-                        $("#box1").append("<tr><td>"+res[i].cardNumber+"</td>><td>"+"<tr><td>"+res[i].cardType+"</td>><td>"+"<tr><td>"+res[i].cardAmount+"</td>><td>"+
-                            "<tr><td>"+res[i].cardPoint+"</td>><td>"+"<tr><td>"+res[i].status+"</td>><td>"+"<tr><td>"+res[i].createTime+"</td>></tr>");
+                        $(".table").eq(0).append("<tr><td>"+res[i].cardNumber+"</td><td>"+res[i].cardType+"</td><td>"+res[i].cardAmount+"</td><td>"+res[i].createTime+"</td>></tr>");
                     }
-                    $("#box1").append("</table>");
+
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = echarts.init(document.getElementById('myChart'));
+                    option = {
+                        toolbox: {
+                            show : false,
+                            x:'center',
+                            feature : {
+                                dataView : {show: true, readOnly: false},
+                                saveAsImage : {show: true}
+                            }
+                        },
+                        calculable : true,
+                        xAxis : [
+                            {
+                                type : 'value',
+                                axisLine:{
+                                    show:false
+                                },
+                                splitLine:{
+                                    show:false
+                                }
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'category',
+                                axisLine:{
+                                  show:false
+                                },
+                                axisLabel:{
+                                    show:false
+                                },
+                                data: (function () {
+                                    var d = [];
+                                    var j=0;
+                                    for(j;j<res.length;j++) {
+                                        d.push([
+                                            ''
+                                        ]);
+                                    }
+                                    return d;
+                                })()
+                            }
+                        ],
+                        series : [
+                            {
+                                type:'bar',
+                                itemStyle:{
+                                    normal:{
+                                        color:'brown',
+                                        barBorderRadius:5,
+                                        barBorderWidth:5
+                                    }
+                                },
+
+                                data: (function () {
+                                    var d = [];
+                                    var j=0;
+                                    for(j;j<res.length;j++) {
+                                        d.push([
+                                            res[res.length-j-1].cardPoint*10
+                                        ]);
+                                    }
+                                    return d;
+                                })()
+                            },
+                        ]
+                    };
+                    // 为echarts对象加载数据
+                    myChart.setOption(option);
                 }
                 else
                 {
@@ -62,9 +135,6 @@
                 }
             }
         })
-    }
-    else{
-        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>尚未登录</p>");
     }
 
 

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>Applycard</title>
 </head>
 <body>
@@ -14,54 +15,54 @@
     <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
+
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
 <div class="box cl inform">
-    <div class="box cl inform">
-        <div class="div-left">
+
+        <div class="div-left"  style="text-align: center">
             <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">信用卡申请</p>
+            <form class="form-inline">
+                &nbsp&nbsp&nbsp
             <div class="form-group">
-                <label for="name">中文姓名</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="name">
+                <label for="acct">申请账户</label>
+                <input type="text" class="form-control" name="acct" id="acct" placeholder="account" style="width:350px">
             </div>
+            </form>
+            <br><br>
+            <form class="form-inline">
+                &nbsp&nbsp&nbsp
             <div class="form-group">
-                <label for="idCard">身份证号</label>
-                <input type="text" class="form-control" name="idCard" id="idCard" placeholder="ID">
+                <label for="inqpwd">POS密码</label>
+                <input type="text" class="form-control" name="inqpwd" id="inqpwd" placeholder="inqpwd" style="width:350px">
             </div>
-            <div class="form-group">
-                <label for="inqpwd">查询密码</label>
-                <input type="text" class="form-control" name="inqpwd" id="inqpwd" placeholder="inqpwd">
-            </div>
+            </form>
             </br>
               <div class="form-group">
+                  &nbsp&nbsp&nbsp
                 <label id="forchange">选择卡种</label>
-               <select>
+               <select id="cardtype">
                   <option value ="BABY_GROWUP">宝贝成长卡</option>
                   <option value ="COMMERICAL">公务卡</option>
                   <option value="GLOBAL_TRAVEL">玩球旅行卡</option>
                    <option value="CHANGLONG">长隆联名卡</option>
                 </select>
               </div>
-            <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile">
-                <p class="help-block">上传身份证正面照，大小不得超过10M</p>
+            <div>
+                &nbsp&nbsp&nbsp<button id="apply" class="btn btn-default">提交申请</button>
             </div>
-
-            <button class="btn btn-default">提交申请</button>
+            <br/>
         </div>
 
         <div class="div-right">
-            <p></p>
+            <div id="myChart" style="margin-left:-10px;height: 244px; width:300px;margin-top:30px"></div>
         </div>
-    </div>
     <div class="line"></div>
 </div>
 
@@ -69,5 +70,112 @@
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src = "js/macarons.js"></script>
+<script type="text/javascript">
+    var apply = document.getElementById("apply");
+
+    if (sessionStorage.getItem('acct') != null)
+    {
+        document.getElementById("p").innerText=sessionStorage.getItem('acct');
+        document.getElementById('acct').value = sessionStorage.getItem('acct');
+    }
+    $.ajax({
+        type:"post",
+        url:"card/countcard",
+        success:function(res){
+            // 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init(document.getElementById('myChart'));
+            var count = new Array();
+            for(var i=0;i<res.length;i++){
+                count.push(res[i]);
+            }
+            option = {
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient : 'center',
+                    x : 'bottom',
+                    data:['BG','CM','GT','CL']
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {
+                            show: true,
+                            type: ['pie', 'funnel'],
+                            option: {
+                                funnel: {
+                                    x: '25%',
+                                    width: '50%',
+                                    funnelAlign: 'center',
+                                    max: 1548
+                                }
+                            }
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'产品热度',
+                        type:'pie',
+                        radius : ['50%', '70%'],
+                        itemStyle : {
+                            normal : {
+                                label : {
+                                    show : false
+                                },
+                                labelLine : {
+                                    show : false
+                                }
+                            },
+                            emphasis : {
+                                label : {
+                                    show : true,
+                                    position : 'center',
+                                    textStyle : {
+                                        fontSize : '30',
+                                        fontWeight : 'bold'
+                                    }
+                                }
+                            }
+                        },
+                        data:[
+                            {value:count[0], name:'BG'},
+                            {value:count[1], name:'CM'},
+                            {value:count[2], name:'GT'},
+                            {value:count[3], name:'CL'}
+                        ]
+                    }
+                ]
+            };
+            // 为echarts对象加载数据
+            myChart.setOption(option);
+        }
+
+    })
+    apply.onclick = function(e){
+        var saveData = {"account":$("#acct").val(),"cardType":$("#cardtype option:selected").val(),"password":$("#inqpwd").val()};
+        e.preventDefault();
+        $.ajax({
+            type:"post",
+            url:`card/apply`,
+            data:JSON.stringify(saveData),
+            contentType : "application/json",
+            dataType:"json",
+            success:function(res){
+                alert("已提交办卡申请");
+            }
+        })
+    }
+
+</script>
 </body>
 </html>

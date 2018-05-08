@@ -15,24 +15,17 @@
     <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
 <div class="box cl inform">
-    <div class="div-left">
         <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">消费曲线</p>
         <div id = "box1"></div>
-    </div>
-
-    <div class="div-right">
-        <div id = "box2"></div>
-    </div>
 </div>
 
 <footer class="cl box">
@@ -44,60 +37,50 @@
 <script type="text/javascript">
     if (sessionStorage.getItem('acct') != null)
     {
-        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>"+ sessionStorage.getItem('acct') +"</p>");
+        document.getElementById("p").innerText=sessionStorage.getItem('acct');
         $.ajax({
             type:"post",
             url:`transaction/list?account=${sessionStorage.getItem('acct')}`,
             success:function(res){
                 if (res.length > 0){
-                    $("#box1").append("<div id='myChart' style='height: 350px; width:650px;'></div>");
+                    $("#box1").append("<div id='myChart' style='height: 400px; width:950px;'></div>");
                     // 基于准备好的dom，初始化echarts图表
                     var myChart = echarts.init(document.getElementById('myChart'));
-                    var count = new Array();
-                    for(var i=0;i<res.length;i++){
-                        count.push(res[i]);
+                    var average = 0;
+                    for (var i=0;i<res.length;i++){
+                        average+=res[i].amount;
                     }
+                    average=average/res.length;
                     option = {
                         title : {
-                            text : '消费曲线',
+                            text: '购买记录',
                         },
                         tooltip : {
-                            trigger: 'item',
-                            formatter : function (params) {
-                                var date = new Date(params.value[0]);
-                                data = date.getFullYear() + '-'
-                                    + (date.getMonth() + 1) + '-'
-                                    + date.getDate() + ' '
-                                    + date.getHours() + ':'
-                                    + date.getMinutes();
-                                return data + '<br/>'
-                                    + params.value[1] + ', '
-                                    + params.value[2];
-                            }
+                            trigger: 'axis'
                         },
                         toolbox: {
                             show : true,
                             feature : {
                                 mark : {show: true},
                                 dataView : {show: true, readOnly: false},
+                                magicType : {show: true, type: ['line', 'bar']},
                                 restore : {show: true},
                                 saveAsImage : {show: true}
                             }
                         },
-                        dataZoom: {
-                            show: true,
-                            start : 70
-                        },
-                        legend : {
-                            data : ['花销']
-                        },
-                        grid: {
-                            y2: 80
-                        },
+                        calculable : true,
                         xAxis : [
                             {
-                                type : 'time',
-                                splitNumber:10
+                                type : 'category',
+                                data: (function () {
+                                    var d = [];
+                                    for(var j=0;j<res.length;j++) {
+                                        d.push([
+                                            res[j].id
+                                        ]);
+                                    }
+                                    return d;
+                                })(),
                             }
                         ],
                         yAxis : [
@@ -107,22 +90,12 @@
                         ],
                         series : [
                             {
-                                name: '花销',
-                                type: 'line',
-                                showAllSymbol: true,
-                                symbolSize: function (value){
-                                    return Math.round(value[2]/10) + 2;
-                                },
+                                type:'line',
                                 data: (function () {
                                     var d = [];
-                                    var len = 0;
-                                    var now = new Date();
-                                    var value;
-                                    while (len++ < 200) {
+                                    for(var k=0;k<res.length;k++) {
                                         d.push([
-                                            new Date(2014, 9, 1, 0, len * 10000),
-                                            (Math.random()*30).toFixed(2) - 0,
-                                            (Math.random()*100).toFixed(2) - 0
+                                            res[k].amount
                                         ]);
                                     }
                                     return d;
@@ -139,9 +112,6 @@
                 }
             }
         })
-    }
-    else{
-        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>尚未登录</p>");
     }
 
 

@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>pointrecord</title>
 </head>
 <body>
@@ -13,22 +15,97 @@
     <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
 <div class="box cl inform">
+    <div class="div-left">
+        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">积分记录</p>
+        <div id = "box1"></div>
+    </div>
 
+    <div class="div-right">
+        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">卡积分总览</p>
+        <div id="myChart" style="margin-left:-35px;height: 214px; width:350px;margin-top:0px"></div>
+    </div>
 </div>
 
 <footer class="cl box">
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src = "js/macarons.js"></script>
+<script type="text/javascript">
+    if (sessionStorage.getItem('acct') != null)
+    {
+        document.getElementById("p").innerText=sessionStorage.getItem('acct');
+        $.ajax({
+            type:"post",
+            url:`transaction/list?account=${sessionStorage.getItem('acct')}`,
+            success:function(res){
+                if (res.length > 0){
+                    $("#box1").append("<table class='table table-hover'></table>");
+                    $(".table").eq(0).append("<tr><th>卡号</th><th>货物ID</th><th>积分值</th></tr>");
+                    for(var i = 0;i<res.length;i++){
+                        $(".table").eq(0).append("<tr><td>"+res[i].cardNumber+"</td>><td>"+res[i].id+"</td>><td>"+res[i].point+"</td></tr>");
+                    }
+                    $.ajax({
+                        type:"post",
+                        url:`card/sumpoint?account=${sessionStorage.getItem('acct')}`,
+                        success:function(res){
+                            // 基于准备好的dom，初始化echarts图表
+                            var myChart = echarts.init(document.getElementById('myChart'));
+                            option = {
+                                tooltip : {
+                                    trigger: 'axis'
+                                },
+                                toolbox: {
+                                    show : false,
+                                    feature : {
+                                        mark : {show: true},
+                                        restore : {show: true},
+                                        saveAsImage : {show: true}
+                                    }
+                                },
+                                polar : [
+                                    {
+                                        indicator : [
+                                            { text: '370246', max: 500},
+                                            { text: '622230', max: 500},
+                                            { text: '625860', max: 500},
+                                            { text: '622599', max: 500},
+                                        ]
+                                    }
+                                ],
+                                calculable : true,
+                                series : [
+                                    {
+                                        type: 'radar',
+                                        data : [
+                                            {
+                                                value : [res[0],res[1],res[2],res[3]],
+                                            }
+                                        ]
+                                    }
+                                ]
+                            };
+
+                            // 为echarts对象加载数据
+                            myChart.setOption(option);
+                        }
+                    })
+
+                }
+            }
+        })
+    }
+
+</script>
 </body>
 </html>

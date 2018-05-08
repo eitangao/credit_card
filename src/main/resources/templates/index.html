@@ -19,7 +19,7 @@
 	    	<ul>
 	    		<li> <a href="index"class="active">首页</a></li>
 	    		<li> <a href="Goods">商品市场</a></li>
-	    		<li> <a href="point">积分兑换</a></li>
+				<p id="p" style="float:right;padding-top: 10px">未登录</p>
 	    	</ul>
 	    </div>
         <br/>
@@ -48,7 +48,7 @@
                 <a href="card">卡片信息</a>
                 <a href="event">消费记录</a>
                 <a href="eventline">消费曲线</a>
-                <a href="point">积分商品</a>
+                <a href="point">积分提额</a>
                 <a href="pointrecord">积分记录</a>
                 <a href="repayment">信用卡还款</a>
             </div>    		
@@ -58,7 +58,7 @@
 	    	<div class="per-left">
 				<div style="position:relative;  left:20px; margin-top:20px;">
 					<br/>
-					<div id="myChart" style="height: 280px; width:250px;"></div>
+					<div id="myChart" style="height: 300px; width:250px;"></div>
 				</div>
 			</div>
 	    	<div class="per-right">
@@ -72,14 +72,14 @@
 								<div style="display: table-cell;vertical-align: middle;text-align: center;">
 									<img src="images/宝贝成长卡.png" alt="" />
 									<p class="information">宝贝成长卡</p>
-									<p class="information">宝贝成长卡说明</p>
+									<p class="information">宝贝成长卡（额度2000）</p>
 								</div>
 							</div>
 							<div style="display: table;float:right;width:40%;height: 100%; ">
 								<div style="display: table-cell;vertical-align: middle;text-align: center;">
 									<img src="images/长隆联名卡.png" alt="" />
 									<p class="information">长隆联名卡</p>
-									<p class="information">长隆联名卡说明</p>
+									<p class="information">长隆联名卡（额度5000）</p>
 								</div>
 							</div>
 						</div>
@@ -88,14 +88,14 @@
 								<div style="display: table-cell;vertical-align: middle;text-align: center;">
 									<img src="images/公务卡.png" alt="" />
 									<p class="information">公务卡</p>
-									<p class="information">公务卡说明</p>
+									<p class="information">公务卡（额度3000）</p>
 								</div>
 							</div>
 							<div style="display: table;float:right;width: 40%;height: 100%; ">
 								<div style="display: table-cell;vertical-align: middle;text-align: center;">
 									<img src="images/环球旅行卡.png" alt="" />
 									<p class="information">环球旅行卡</p>
-									<p class="information">环球旅行卡说明</p>
+									<p class="information">环球旅行卡（额度4000）</p>
 								</div>
 							</div>
 						</div>
@@ -148,7 +148,9 @@
 		<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
 		<script src = "js/macarons.js"></script>
 		<script type="text/javascript">
-
+            if (sessionStorage.getItem('acct') != null) {
+                document.getElementById("p").innerText=sessionStorage.getItem('acct');
+            }
             $.ajax({
 				type:"post",
 				url:"card/countcard",
@@ -171,7 +173,7 @@
                         legend: {
                             x : 'center',
                             y : 'bottom',
-                            data:['rose1','rose2','rose3','rose4']
+                            data:['BG','CL','GT','CM']
                         },
                         toolbox: {
                             show : true,
@@ -192,10 +194,10 @@
                                 max: 40,                // for funnel
                                 sort : 'ascending',     // for funnel
                                 data:[
-                                    {value:count[0], name:'rose1'},
-                                    {value:count[1], name:'rose2'},
-                                    {value:count[2], name:'rose3'},
-                                    {value:count[3], name:'rose4'}
+                                    {value:count[0], name:'BG'},
+                                    {value:count[1], name:'CL'},
+                                    {value:count[2], name:'GT'},
+                                    {value:count[3], name:'CM'}
                                 ]
                             }
                         ]
@@ -205,8 +207,6 @@
 				}
 
 			})
-
-
 
 		</script>
 	</body>

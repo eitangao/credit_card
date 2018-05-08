@@ -7,93 +7,63 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/detail.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/stories.css"/>
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>Goods</title>
 </head>
 <body>
     <div class="box cl header">
         <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
+        <div style="float:right">
         <span>服务热线：95555</span>
-        <span>信用卡热线：18353512650</span>
-        <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
+            <span>信用卡热线：18353512650</span></div>
         <ul>
             <li> <a href="index">首页</a></li>
             <li> <a href="Goods" class="active">商品市场</a></li>
-            <li> <a href="point">积分兑换</a></li>
+            <p id="p" style="float:right;padding-top: 10px">未登录</p>
         </ul>
     </div>
     <br />
 
     <div class="box cl inform">
         <div class="detail_main_right cl">
-            <div class="main_right_search cl">
-                <ul class="search_left">
-                    <li>全部分类</li>
-                    <li>价格</li>
-                </ul>
-                <ul class="search_right">
-                    <li>
-                                <span>
-                                    <a href="#">上衣</a>
-                                </span>
-                        <span>
-                                    <a href="#">下装</a>
-                                </span>
-                        <span>
-                                    <a href="#">鞋</a>
-                                </span>
-                        <span>
-                                    <a href="#">家具</a>
-                                </span>
-                        <span>
-                                    <a href="#">食品</a>
-                                </span>
-
-                    </li>
-                    <li>
-                                <span>
-                                    <a href="#">100以下</a>
-                                </span>
-                        <span>
-                                    <a href="#">100-300</a>
-                                </span>
-                        <span>
-                                    <a href="#">300-500</a>
-                                </span>
-                        <span>
-                                    <a href="#">500-1000</a>
-                                </span>
-                        <span>
-                                    <a href="#">1000-5000</a>
-                                </span>
-                        <span>
-                                    <a href="#">5000以上</a>
-                                </span>
-                    </li>
-
-                </ul>
-            </div>
             <div class="right_goods cl">
-                <ul class="right_goods_list cl">
-                    <li class="default">
-                        <a href="#">推荐购买</a>
-                    </li>
-                    <li>
-                        <a href="#">按销量排序</a>
-                    </li>
-                    <li>
-                        <a href="#">按价格排序</a>
-                    </li>
 
-                </ul>
-                <ul class="right_goods_box cl">
+			<div style="padding: 20px;">
+				<ul id="maingoods" class="cl" style="overflow: visible;">
+					
+					
+					
+				</ul>								
+			</div>
+					<script type="text/javascript">
+			$(function(){
+				$.ajax({
+					type:"get",
+					url:"code/maingoods.json",
+					async:true,
+					success:function(res){
+						for(let i = 0 ; i < res.length ; i++){
+							$("#maingoods").append("<li class='goods-li' id='" + res[i].id + "'><a href='gooddetail?id=" + res[i].id + "' target='_blank'><div class='goods-before'><img class='goods-img1' src= " + res[i].img1 + "><div class='goods-out'><img class='goods-img2' src=" + res[i].img2 + "></div></a><div class='goods-information'> <p class='goods-p1' style='font-size: 14px; padding-top: 14px; padding-bottom: 10px;width:100%;'>" + res[i].title + "</p> <p class='goods-p2' style='width:100%;'>" + res[i].price + "</p><p style='line-height:44px;font-size:14px;'>立即购买></p></div></div></li>");
+//							$("#maingoods").on("click",".goods-li",function(){
+//								$(".goods-li").eq(i).click(function(){
+//									window.location.href="particulars.html?id=" + res[i].id ;
+//									
+//								});
+//								return false;
+//							});
+							
+					}
+						$(".goods-li").eq(0).append("<i class='goods-i'>棉质T恤，装饰印有“II Prato di Ganimede Guccification”和狼头图案的红色撞色印花。伽倪莫德斯草坪，位于波波里花园中的一隅</i>");
+						$(".goods-li").eq(5).append("<i class='goods-i'>象牙色卫衣&红色印花，印花带有意大利短语“SprovvedutaEtu”意为“天真年代”，源自公元前一世纪拉丁语诗歌“DeReum Natura（物性论）”，诗文阐述了伊比鸠鲁学派的哲学思想</i>");
+						
+					}
+					
+				});
+			})
+		</script>
 
-                </ul>
-                <div class="right_goods_page">
-                    <button>1</button>
-                    <button>2</button>
-                    <button></button>
-
-                </div>
             </div>
         </div>
     </div>
@@ -105,5 +75,28 @@
         <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
         <div class="foot1"> 沪ICP备05000001号</div>
     </footer>
+    <script type="text/javascript">
+        var acct=null;
+        if (sessionStorage.getItem('acct') != null) {
+            acct = sessionStorage.getItem('acct');
+            document.getElementById("p").innerText=acct;
+        }else{
+            acct = "obama";
+        }
+        $.ajax({
+            type:"post",
+            url:`goods/recommend?account=${acct}`,
+            success:function(res){
+                if (res.length > 0){
+                    $(".table").eq(0).append("<tr><th>商品ID</th><th>商品名</th><th>商品价格</th><th>商品积分</th><th>商品类别</th></tr>");
+                    for(var i = 0;i<res.length;i++){
+                        $(".table").eq(0).append("<tr><td>"+res[i].id+"</td>><td>"+res[i].name+"</td>><td>"+res[i].price+"</td>><td>"
+                            +res[i].point+"</td>><td>"+res[i].productType+"</td>></tr>");
+                    }
+                }
+            }
+        })
+
+    </script>
 </body>
 </html>

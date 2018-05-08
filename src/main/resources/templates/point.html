@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src = "js/jquery-1.10.1.min.js"></script>
     <title>point</title>
 </head>
 <body>
@@ -13,22 +15,71 @@
         <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
         <span>服务热线：95555</span>
         <span>信用卡热线：18353512650</span>
-        <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
         <ul>
             <li> <a href="index">首页</a></li>
             <li> <a href="Goods">商品市场</a></li>
-            <li> <a href="point" class="active">积分兑换</a></li>
+            <p id="p" style="float:right;padding-top: 10px">未登录</p>
         </ul>
     </div>
     <br />
 
     <div class="box cl inform">
+        <div class="div-left" style="text-align: center">
+            <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">积分提额</p>
 
+            <form class="form-inline">
+                &nbsp&nbsp&nbsp
+                <div class="form-group">
+                    <label for="cardnbr">提额卡号</label>
+                    <input type="text" class="form-control" name="cardnbr" id="cardnbr" placeholder="cardnbr" style="width:350px">
+                </div>
+                <div class="form-group">
+                    <button id="point" class="btn btn-default" style="width:80px;">可提</button>
+                </div>
+                <div class="form-group">
+                    <button id="play" class="btn btn-default" style="width:80px;">提额</button>
+                </div>
+                <br/><br/>
+            </form>
+
+        </div>
+
+        <div class="div-right">
+            <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">卡片状态</p>
+            <table class="table table-hover">
+                <tr>
+                    <th>可提额度</th>
+                    <td id ="cardpoint"></td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <footer class="cl box">
         <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
         <div class="foot1"> 沪ICP备05000001号</div>
     </footer>
+    <script type="text/javascript">
+        var point = document.getElementById("point");
+        var play = document.getElementById("play");
+        if (sessionStorage.getItem('acct') != null)
+        {
+            document.getElementById("p").innerText=sessionStorage.getItem('acct');
+
+        }
+        point.onclick = function(e){
+            e.preventDefault();
+            $.ajax({
+                type:"post",
+                url:`card/cardstatus?cardNumber=${$("#cardnbr").val()}`,
+                success:function(res){
+                    document.getElementById("cardpoint").innerText=res.cardPoint*10;
+                }
+            })
+        }
+        play.onclick = function(e){
+        }
+
+    </script>
 </body>
 </html>

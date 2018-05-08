@@ -15,23 +15,23 @@
     <img style="float: left;margin-right: 50px;" src="images/logo.jpg" alt="" />
     <span>服务热线：95555</span>
     <span>信用卡热线：18353512650</span>
-    <div class="search"> <input type="text" placeholder="请输入关键词搜索" /></div>
     <ul>
         <li> <a href="index" class="active">首页</a></li>
         <li> <a href="Goods">商品市场</a></li>
-        <li> <a href="point">积分兑换</a></li>
+        <p id="p" style="float:right;padding-top: 10px">未登录</p>
     </ul>
 </div>
 <br />
 
 <div class="box cl inform">
     <div class="div-left">
-        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">卡片信息</p>
+        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">消费记录</p>
         <div id = "box1"></div>
     </div>
 
     <div class="div-right">
-        <div id = "box2"></div>
+        <p style="text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;">购买力</p>
+        <div id="myChart" style="margin-left:-50px;height: 214px; width:340px;margin-top:-23px"></div>
     </div>
 </div>
 
@@ -39,22 +39,121 @@
     <div class="foot1"> 服务热线：95555（大陆地区）；+86（区号）95555（海外及港澳台地区）信用卡热线：40000-95555（大陆地区）；+86 10-66085566（海外及港澳台地区）</div>
     <div class="foot1"> 沪ICP备05000001号</div>
 </footer>
+<script src = "http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+<script src = "js/macarons.js"></script>
 <script type="text/javascript">
+    var amount=0;
     if (sessionStorage.getItem('acct') != null)
     {
-        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>"+ sessionStorage.getItem('acct') +"</p>");
+        document.getElementById("p").innerText=sessionStorage.getItem('acct');
         $.ajax({
             type:"post",
             url:`transaction/list?account=${sessionStorage.getItem('acct')}`,
             success:function(res){
                 if (res.length > 0){
-                    $("#box1").append("<table class='table table-hover'>");
-                    $("#box1").append("<tr><th>消费流水号</th><th>消费金额</th><th>卡号</th><th>货物ID</th><th>申请时间</th></tr>");
+                    $("#box1").append("<table class='table table-hover'></table>");
+                    $(".table").eq(0).append("<tr><th>消费流水号</th><th>消费金额</th><th>卡号</th><th>消费时间</th></tr>");
                     for(var i = 0;i<res.length;i++){
-                        $("#box1").append("<tr><td>"+res[i].id+"</td>><td>"+"<tr><td>"+res[i].amount+"</td>><td>"+"<tr><td>"+res[i].cardNumber+"</td>><td>"+
-                            "<tr><td>"+res[i].product+"</td>><td>"+"<tr><td>"+res[i].createTime+"</td></tr>");
+                        $(".table").eq(0).append("<tr><td>"+res[i].id+"</td><td>"+res[i].amount+"</td><td>"+res[i].cardNumber+"</td><td>"+res[i].createTime+"</td></tr>");
                     }
-                    $("#box1").append("</table>");
+                    for(var j = 0;j<res.length;j++){
+                        amount+=res[j].amount;
+                    }
+                    amount=Math.round(amount/res.length);
+                    // 基于准备好的dom，初始化echarts图表
+                    var myChart = echarts.init(document.getElementById('myChart'));
+                    option = {
+                        toolbox: {
+                            show : false,
+                            feature : {
+                                mark : {show: true},
+                                restore : {show: true},
+                                saveAsImage : {show: true}
+                            }
+                        },
+                        series : [
+                            {
+                                name:'购买力',
+                                type:'gauge',
+                                center : ['50%', '50%'],    // 默认全局居中
+                                radius : [0, '75%'],
+                                startAngle: 140,
+                                endAngle : -140,
+                                min: 0,                     // 最小值
+                                max: 2000,                   // 最大值
+                                precision: 0,               // 小数精度，默认为0，无小数点
+                                splitNumber: 10,             // 分割段数，默认为5
+                                axisLine: {            // 坐标轴线
+                                    show: true,        // 默认显示，属性show控制显示与否
+                                    lineStyle: {       // 属性lineStyle控制线条样式
+                                        width: 30
+                                    }
+                                },
+                                axisTick: {            // 坐标轴小标记
+                                    show: true,        // 属性show控制显示与否，默认不显示
+                                    splitNumber: 5,    // 每份split细分多少段
+                                    length :8,         // 属性length控制线长
+                                    lineStyle: {       // 属性lineStyle控制线条样式
+                                        color: '#eee',
+                                        width: 1,
+                                        type: 'solid'
+                                    }
+                                },
+                                axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                                    show: true,
+                                    formatter: function(v){
+                                        switch (v+''){
+                                            case '10': return '200';
+                                            case '60': return '1200';
+                                            case '90': return '1800';
+                                            default: return '';
+                                        }
+                                    },
+                                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                        color: '#333'
+                                    }
+                                },
+                                splitLine: {           // 分隔线
+                                    show: true,        // 默认显示，属性show控制显示与否
+                                    length :30,         // 属性length控制线长
+                                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                                        color: '#eee',
+                                        width: 2,
+                                        type: 'solid'
+                                    }
+                                },
+                                pointer : {
+                                    length : '80%',
+                                    width : 8,
+                                    color : 'auto'
+                                },
+                                title : {
+                                    show : true,
+                                    offsetCenter: ['-65%', -10],       // x, y，单位px
+                                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                        color: '#333',
+                                        fontSize : 18
+                                    }
+                                },
+                                detail : {
+                                    show : true,
+                                    backgroundColor: 'rgba(0,0,0,0)',
+                                    borderWidth: 0,
+                                    borderColor: '#ccc',
+                                    width: 100,
+                                    height: 40,
+                                    offsetCenter: ['-35%', 1],       // x, y，单位px
+                                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                                        fontSize : 15
+                                    }
+                                },
+                                data:[amount]
+                            }
+                        ]
+                    };
+
+                    myChart.setOption(option);
+
                 }
                 else
                 {
@@ -62,9 +161,6 @@
                 }
             }
         })
-    }
-    else{
-        $("#box2").append("<p style='text-align:center; font-size: 18px;line-height: 45px;margin-bottom: 40px; border-bottom:1px solid #dadada ;'>尚未登录</p>");
     }
 
 
