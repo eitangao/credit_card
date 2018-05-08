@@ -9,10 +9,11 @@
     <result column="type" jdbcType="VARCHAR" property="productType" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
     <result column="application" jdbcType="VARCHAR" property="applicaplePeople" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
     <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, price, spoint, type as productType, application as applicaplePeople, count, create_time
+    id, name, price, spoint, type as productType, application as applicaplePeople, count, picture, create_time
   </sql>
   <select id="getGoodsByCondition" parameterType="Map" resultMap="Goods">
     select
@@ -52,5 +53,13 @@
     set count=(count+1)
     where id= #{id,jdbcType=BIGINT}
   </update>
+  <insert id="insert" parameterType="Goods" >
+    insert into goods (id, name, price,
+      spoint, type, application,count,picture
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{point,jdbcType=INTEGER}, #{productType,jdbcType=VARCHAR}, #{applicaplePeople,jdbcType=VARCHAR},#{count,jdbcType=INTEGER},
+      #{picture,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP})
+  </insert>
 
 </mapper>

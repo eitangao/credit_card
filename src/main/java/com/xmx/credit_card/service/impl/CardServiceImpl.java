@@ -26,9 +26,14 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public void repayment(String cardNumber, BigDecimal amount) {
-        updateCardByCardNumber(cardNumber,getAmountByCardNumber(cardNumber).add(amount),null);
+        BigDecimal previousCardAmount=getAmountByCardNumber(cardNumber);
+        if(previousCardAmount==null)
+            throw new RuntimeException("No such card");
+        updateCardByCardNumber(cardNumber,previousCardAmount.add(amount),null);
         String account=getCardByCardNumber(cardNumber).getAcct();
-        userService.updateAmount(account,userService.getAmountByAccount(account).add(amount));
+        BigDecimal previousUserAmount=userService.getAmountByAccount(account);
+        if(previousUserAmount!=null)
+            userService.updateAmount(account,previousUserAmount.add(amount));
     }
 
     @Override

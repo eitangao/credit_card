@@ -22,7 +22,17 @@ public class Goods {
 
     private Integer count;
 
+    private String picture;
+
     private LocalDateTime createTime;
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public Long getId() {
         return id;
